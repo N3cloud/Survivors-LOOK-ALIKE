@@ -12,7 +12,7 @@ height = 20.0
 size = Vector2(14, 22)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uh1f3"]
-radius = 369.305
+radius = 165.048
 
 [node name="Jugador" type="CharacterBody2D"]
 position = Vector2(56, -32)
@@ -59,6 +59,14 @@ wait_time = 1.5
 unique_name_in_owner = true
 wait_time = 0.075
 
+[node name="arma2Timer" type="Timer" parent="Ataques"]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[node name="armar2AtaqueTimer" type="Timer" parent="Ataques/arma2Timer"]
+unique_name_in_owner = true
+wait_time = 0.2
+
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 4
@@ -71,6 +79,8 @@ shape = SubResource("CircleShape2D_uh1f3")
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Ataques/flechaTimer" to="." method="_on_flecha_timer_timeout"]
 [connection signal="timeout" from="Ataques/flechaTimer/flechaAttackTimer" to="." method="_on_flecha_attack_timer_timeout"]
+[connection signal="timeout" from="Ataques/arma2Timer" to="." method="_on_arma_2_timer_timeout"]
+[connection signal="timeout" from="Ataques/arma2Timer/armar2AtaqueTimer" to="." method="_on_armar_2_ataque_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 

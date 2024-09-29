@@ -5,7 +5,7 @@ var level = 1
 var hp = 1
 var damage = 5
 var speed = 100
-var knock_amount = 100
+var knockback_amount = 100
 var attack_size = 1.0
 
 var target = Vector2.ZERO
@@ -13,15 +13,17 @@ var angle = Vector2.ZERO
 
 @onready var player = get_tree().get_first_node_in_group("jugador")
 
+signal remove_from_array(object)
+
 func _ready() -> void:
 	angle = global_position.direction_to(target)
-	rotation = angle.angle() + deg_to_rad(135)
+	rotation = angle.angle() + deg_to_rad(0)
 	match level:
 		1:
 			hp = 1
 			speed = 100
 			damage = 5
-			knock_amount = 100
+			knockback_amount = 100
 			attack_size = 1.0
 		 
 func _physics_process(delta: float) -> void:
@@ -30,9 +32,11 @@ func _physics_process(delta: float) -> void:
 func enemy_hit(charge = 1):
 	hp -= charge
 	if hp <= 0:
+		emit_signal("remove_from_array", self)
 		queue_free()
 	
 
 
 func _on_timer_timeout() -> void:
+	emit_signal("remove_from_array", self)
 	queue_free()

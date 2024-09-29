@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://5hjathaik131"]
 
-[ext_resource type="Texture2D" uid="uid://bc5i714vmjj77" path="res://Textures/dirt_full_new.png" id="1_st1x6"]
+[ext_resource type="Texture2D" uid="uid://bhyuck3vs6x1g" path="res://Textures/TX Tileset Grass.png" id="1_bg3qq"]
 [ext_resource type="PackedScene" uid="uid://dwud7342c4hlo" path="res://Jugador/jugador.tscn" id="2_jpbwj"]
 [ext_resource type="PackedScene" uid="uid://bpoiwgj27oihq" path="res://Utilidades/enemy_spawner.tscn" id="3_av52f"]
 [ext_resource type="PackedScene" uid="uid://cqgooidkhkf23" path="res://Enemigo/enemigo.tscn" id="3_wyefw"]
@@ -18,16 +18,16 @@ spawn_delay_counter = 0
 [node name="Mundo" type="Node2D"]
 
 [node name="Fondo" type="Sprite2D" parent="."]
-texture_filter = 5
+texture_filter = 3
 texture_repeat = 2
 position = Vector2(-603, -70.0002)
 scale = Vector2(1.53125, 1.51562)
-texture = ExtResource("1_st1x6")
+texture = ExtResource("1_bg3qq")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
 
 [node name="Jugador" parent="." instance=ExtResource("2_jpbwj")]
-position = Vector2(153, 75)
+position = Vector2(59, -28)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_av52f")]
 spawns = Array[ExtResource("4_mj78d")]([SubResource("Resource_qxtp4")])
