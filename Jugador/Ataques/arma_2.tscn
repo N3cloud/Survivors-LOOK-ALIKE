@@ -1,10 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8d13lyweap2d"]
+[gd_scene load_steps=21 format=3 uid="uid://c8d13lyweap2d"]
 
 [ext_resource type="Script" path="res://Jugador/Ataques/arma_2.gd" id="1_0wa1p"]
-[ext_resource type="Texture2D" uid="uid://blf67t1i62s48" path="res://Textures/Items/Weapons/tornado.png" id="1_u7dyv"]
+[ext_resource type="Texture2D" uid="uid://bnwlpay0cenhg" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)1.png" id="2_vhnwb"]
+[ext_resource type="Texture2D" uid="uid://2r77gv31v8cp" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)2.png" id="3_rkero"]
+[ext_resource type="Texture2D" uid="uid://dp6f78sk8v154" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)3.png" id="4_7n7ag"]
+[ext_resource type="Texture2D" uid="uid://bhn4bjevqutfv" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)4.png" id="5_ly3tv"]
+[ext_resource type="Texture2D" uid="uid://bwaas5kmbgj1m" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)5.png" id="6_et0w4"]
+[ext_resource type="Texture2D" uid="uid://c03sqw4dn1ftv" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)6.png" id="7_fc55g"]
+[ext_resource type="Texture2D" uid="uid://v4x4wc8jg3iu" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)7.png" id="8_sk6i6"]
+[ext_resource type="Texture2D" uid="uid://b0xhjnlqx62nw" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)8.png" id="9_yfwa3"]
+[ext_resource type="Texture2D" uid="uid://ox36tik2wd2e" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)9.png" id="10_nwa1l"]
+[ext_resource type="Texture2D" uid="uid://b2dacv72mxf1y" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)10.png" id="11_uusvl"]
+[ext_resource type="Texture2D" uid="uid://bt5g258gbwl4o" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)11.png" id="12_xtrfh"]
+[ext_resource type="Texture2D" uid="uid://cmkacrjrdmsov" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)12.png" id="13_qdeoi"]
+[ext_resource type="Texture2D" uid="uid://cyilcbxf0x75n" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)13.png" id="14_p700k"]
+[ext_resource type="Texture2D" uid="uid://dpadcphot7wmm" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)14.png" id="15_2dxln"]
+[ext_resource type="Texture2D" uid="uid://4cycenj4tiuo" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)15.png" id="16_8cwr5"]
+[ext_resource type="Texture2D" uid="uid://tnq754n8qgxv" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)16.png" id="17_t7r05"]
+[ext_resource type="Texture2D" uid="uid://cebae6hse7kry" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)17.png" id="18_m4t81"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xjgjr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vhnwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rkero")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7n7ag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ly3tv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_et0w4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fc55g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sk6i6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yfwa3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nwa1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_uusvl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_xtrfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_qdeoi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_p700k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_2dxln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_8cwr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_t7r05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_m4t81")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vhnwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rkero")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7n7ag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ly3tv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ad0rl"]
-size = Vector2(15, 26)
+size = Vector2(19.5, 21)
 
 [node name="Arma2" type="Area2D" groups=["attack"]]
 top_level = true
@@ -14,10 +101,14 @@ script = ExtResource("1_0wa1p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_u7dyv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+sprite_frames = SubResource("SpriteFrames_xjgjr")
+frame_progress = 0.541863
+speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 1)
+position = Vector2(1.75, 1.5)
 shape = SubResource("RectangleShape2D_ad0rl")
 
 [node name="Timer" type="Timer" parent="."]

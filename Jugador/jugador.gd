@@ -33,6 +33,7 @@ var enemy_close = []
 
 @onready var sprite = $Sprite2D
 @onready var walkTimer = get_node("%walkTimer")
+@onready var anim = $Sprite2D/AnimatedSprite2D
 
 func _ready() -> void:
 	attack()
@@ -45,19 +46,21 @@ func movement():
 	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
 	var mov = Input.get_vector("left", "right", "up", "down")
 	if mov.x > 0:
-		sprite.flip_h = false
+		anim.flip_h = false
 	elif mov.x < 0:
-		sprite.flip_h = true
+		anim.flip_h = true
 	
 	if mov != Vector2.ZERO:
 		last_movement = mov
 		if walkTimer.is_stopped():
-			if sprite.frame >= sprite.hframes - 1:
-				sprite.frame = 0
-			else :
-				sprite.frame += 1
+			anim.play("default")
 			walkTimer.start()
-	
+		else :	
+			walkTimer.start()
+	else:
+		if anim.get_animation() != "idle":
+			anim.play("idle")
+			
 	velocity = mov.normalized()*movement_speed
 	move_and_slide()
 

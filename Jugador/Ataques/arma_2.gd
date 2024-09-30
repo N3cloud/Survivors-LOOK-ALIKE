@@ -15,6 +15,7 @@ var angle_more = Vector2.ZERO
 signal remove_from_array(object)
 
 @onready var player = get_tree().get_first_node_in_group("jugador")
+@onready var anim = $Sprite2D/AnimatedSprite2D
 
 func _ready() -> void:
 	match level:
@@ -67,10 +68,11 @@ func enemy_hit(_charge):
 	
 func _physics_process(delta: float) -> void:
 	position += angle*speed*delta 
-			
-			
-
-
+	anim.play("default")  
+	await get_tree().create_timer(1.6).timeout
+	queue_free()
+					
+	
 func _on_timer_timeout() -> void:
 	emit_signal("remove_from_array")
 	queue_free()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmgw3ygpawqt"
-path="res://.godot/imported/Soldier-Walk.png-32efa302340ed200d119056c3ecaa422.ctex"
+uid="uid://bhn4bjevqutfv"
+path="res://.godot/imported/Dark VFX 1 (40x32)4.png-4eadcd49401e07c1de35a69b721ac69f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Player/Soldier-Walk.png"
-dest_files=["res://.godot/imported/Soldier-Walk.png-32efa302340ed200d119056c3ecaa422.ctex"]
+source_file="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)4.png"
+dest_files=["res://.godot/imported/Dark VFX 1 (40x32)4.png-4eadcd49401e07c1de35a69b721ac69f.ctex"]
 
 [params]
 

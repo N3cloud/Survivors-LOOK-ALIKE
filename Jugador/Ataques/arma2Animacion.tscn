@@ -1,0 +1,94 @@
+[gd_scene load_steps=19 format=3 uid="uid://sey2fueaauar"]
+
+[ext_resource type="Texture2D" uid="uid://bnwlpay0cenhg" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)1.png" id="1_vaybt"]
+[ext_resource type="Texture2D" uid="uid://2r77gv31v8cp" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)2.png" id="2_4r0ef"]
+[ext_resource type="Texture2D" uid="uid://dp6f78sk8v154" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)3.png" id="3_pmfpm"]
+[ext_resource type="Texture2D" uid="uid://bhn4bjevqutfv" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)4.png" id="4_lofdw"]
+[ext_resource type="Texture2D" uid="uid://bwaas5kmbgj1m" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)5.png" id="5_ggls4"]
+[ext_resource type="Texture2D" uid="uid://c03sqw4dn1ftv" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)6.png" id="6_4ajpy"]
+[ext_resource type="Texture2D" uid="uid://v4x4wc8jg3iu" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)7.png" id="7_33nmv"]
+[ext_resource type="Texture2D" uid="uid://b0xhjnlqx62nw" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)8.png" id="8_onki4"]
+[ext_resource type="Texture2D" uid="uid://ox36tik2wd2e" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)9.png" id="9_1crpo"]
+[ext_resource type="Texture2D" uid="uid://b2dacv72mxf1y" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)10.png" id="10_o6kdn"]
+[ext_resource type="Texture2D" uid="uid://bt5g258gbwl4o" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)11.png" id="11_ihdv8"]
+[ext_resource type="Texture2D" uid="uid://cmkacrjrdmsov" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)12.png" id="12_i2l8m"]
+[ext_resource type="Texture2D" uid="uid://cyilcbxf0x75n" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)13.png" id="13_sm2lw"]
+[ext_resource type="Texture2D" uid="uid://dpadcphot7wmm" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)14.png" id="14_6j3x1"]
+[ext_resource type="Texture2D" uid="uid://4cycenj4tiuo" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)15.png" id="15_jbcqd"]
+[ext_resource type="Texture2D" uid="uid://tnq754n8qgxv" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)16.png" id="16_irjaw"]
+[ext_resource type="Texture2D" uid="uid://cebae6hse7kry" path="res://Textures/Items/Weapons/Arma2(DARKK)/Dark VFX 1 (40x32)17.png" id="17_5iupg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xjgjr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vaybt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4r0ef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pmfpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lofdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ggls4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4ajpy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_33nmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_onki4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1crpo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_o6kdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ihdv8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_i2l8m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_sm2lw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_6j3x1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jbcqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_irjaw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_5iupg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_vaybt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4r0ef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pmfpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lofdw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_xjgjr")
+speed_scale = 2.0
