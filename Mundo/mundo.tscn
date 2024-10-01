@@ -27,7 +27,8 @@ region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
 
 [node name="Jugador" parent="." instance=ExtResource("2_jpbwj")]
-position = Vector2(59, -28)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_av52f")]
 spawns = Array[ExtResource("4_mj78d")]([SubResource("Resource_qxtp4")])
+
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]

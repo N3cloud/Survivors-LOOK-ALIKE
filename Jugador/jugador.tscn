@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dwud7342c4hlo"]
+[gd_scene load_steps=33 format=3 uid="uid://dwud7342c4hlo"]
 
 [ext_resource type="Script" path="res://Jugador/jugador.gd" id="1_fnw1q"]
 [ext_resource type="Texture2D" uid="uid://dgln0evj0153m" path="res://Textures/Player/run/run_1.png" id="2_lsyar"]
@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://dspvbpf15nkq6" path="res://Textures/Player/idle/idle_10.png" id="21_0nayp"]
 [ext_resource type="Texture2D" uid="uid://cp000d7h473ge" path="res://Textures/Player/idle/idle_11.png" id="22_47gtl"]
 [ext_resource type="Texture2D" uid="uid://cli274rg3coto" path="res://Textures/Player/idle/idle_12.png" id="23_3kacm"]
+[ext_resource type="Texture2D" uid="uid://smd0jts4gfp0" path="res://Textures/GUI/exp_background.png" id="25_jkg3k"]
+[ext_resource type="Texture2D" uid="uid://c8bnj6epiwxor" path="res://Textures/GUI/exp_progress.png" id="26_ulk0o"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_awq1q"]
 animations = [{
@@ -112,16 +114,21 @@ height = 34.0
 size = Vector2(18, 38)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uh1f3"]
-radius = 165.048
+radius = 324.025
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5wtog"]
+radius = 63.0317
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qyob0"]
+radius = 12.083
 
 [node name="Jugador" type="CharacterBody2D"]
-position = Vector2(56, -32)
 motion_mode = 1
 script = ExtResource("1_fnw1q")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["jugador"]]
 texture_filter = 1
-position = Vector2(39, 36)
+position = Vector2(97, 4)
 scale = Vector2(1, 1.072)
 flip_h = true
 hframes = 10
@@ -129,18 +136,18 @@ frame = 1
 region_rect = Rect2(120, 212, 2641, 43)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
-position = Vector2(-97.1816, -42.3688)
+position = Vector2(-241, -104.478)
 sprite_frames = SubResource("SpriteFrames_awq1q")
 animation = &"idle"
 frame_progress = 0.872774
 speed_scale = 3.0
+centered = false
 flip_h = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-60, 33)
+position = Vector2(-1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-57, 31)
 shape = SubResource("CapsuleShape2D_1lwkn")
 
 [node name="walkTimer" type="Timer" parent="."]
@@ -153,7 +160,6 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(-58, 31)
 shape = SubResource("RectangleShape2D_n8xva")
 
 [node name="Ataques" type="Node2D" parent="."]
@@ -175,14 +181,54 @@ unique_name_in_owner = true
 wait_time = 0.2
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
-position = Vector2(-58, 32)
 shape = SubResource("CircleShape2D_uh1f3")
+
+[node name="GrabArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("CircleShape2D_5wtog")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_qyob0")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ExpProgressBar" type="TextureProgressBar" parent="GUI/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_under = ExtResource("25_jkg3k")
+texture_progress = ExtResource("26_ulk0o")
+
+[node name="Label_Nivel" type="Label" parent="GUI/GUI/ExpProgressBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 540.0
+offset_top = -3.0
+offset_right = 640.0
+offset_bottom = 20.0
+text = "Nivel : 1
+"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Ataques/flechaTimer" to="." method="_on_flecha_timer_timeout"]
@@ -191,5 +237,7 @@ shape = SubResource("CircleShape2D_uh1f3")
 [connection signal="timeout" from="Ataques/arma2Timer/armar2AtaqueTimer" to="." method="_on_armar_2_ataque_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
+[connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 
 [editable path="HurtBox"]
