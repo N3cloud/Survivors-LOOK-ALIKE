@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3gp1cil211gi"]
+
+[ext_resource type="Script" path="res://Utilidades/item_option.gd" id="1_aix42"]
+[ext_resource type="Texture2D" uid="uid://bf83kgkks7qfm" path="res://Textures/Items/Weapons/sword.png" id="1_y8qtd"]
+
+[node name="ItemOption" type="ColorRect" groups=["jugador"]]
+custom_minimum_size = Vector2(180, 50)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.544974, 0.544974, 0.544974, 1)
+script = ExtResource("1_aix42")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 1)
+
+[node name="ItemIcon" type="TextureRect" parent="ColorRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 38.0
+offset_bottom = 38.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_y8qtd")
+
+[node name="label_nombre" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 30.0
+offset_top = -2.0
+offset_right = 84.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 14
+text = "nombre"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="label_descripcion" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 9.0
+offset_top = 26.0
+offset_right = 171.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 8
+text = "descripcion del item"
+
+[node name="label_nivel" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 129.0
+offset_top = -1.0
+offset_right = 180.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 12
+text = "nivel 1"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 50.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

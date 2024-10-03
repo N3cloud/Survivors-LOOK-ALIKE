@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://5hjathaik131"]
+[gd_scene load_steps=8 format=3 uid="uid://5hjathaik131"]
 
 [ext_resource type="Texture2D" uid="uid://bhyuck3vs6x1g" path="res://Textures/TX Tileset Grass.png" id="1_bg3qq"]
 [ext_resource type="PackedScene" uid="uid://dwud7342c4hlo" path="res://Jugador/jugador.tscn" id="2_jpbwj"]
 [ext_resource type="PackedScene" uid="uid://bpoiwgj27oihq" path="res://Utilidades/enemy_spawner.tscn" id="3_av52f"]
 [ext_resource type="PackedScene" uid="uid://cqgooidkhkf23" path="res://Enemigo/enemigo.tscn" id="3_wyefw"]
 [ext_resource type="Script" path="res://Utilidades/spawn_info.gd" id="4_mj78d"]
+[ext_resource type="PackedScene" uid="uid://753w1it0t6wy" path="res://Objetos/experiencia.tscn" id="6_r5ta6"]
 
 [sub_resource type="Resource" id="Resource_qxtp4"]
 script = ExtResource("4_mj78d")
@@ -26,9 +27,13 @@ texture = ExtResource("1_bg3qq")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
 
-[node name="Jugador" parent="." instance=ExtResource("2_jpbwj")]
+[node name="Jugador" parent="." groups=["jugador"] instance=ExtResource("2_jpbwj")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_av52f")]
 spawns = Array[ExtResource("4_mj78d")]([SubResource("Resource_qxtp4")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="Experiencia" parent="Loot" instance=ExtResource("6_r5ta6")]
+position = Vector2(109, -60)
+experience = 10
