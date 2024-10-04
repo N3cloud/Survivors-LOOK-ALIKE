@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bu3o52jnef5kr"
-path="res://.godot/imported/projectiles_and_effects_256x128_SpriteSheet.png-dde434908f15f7162760c4e231cf743c.ctex"
+path="res://.godot/imported/flecha.png-dcf71c5163006a80ac4290a33b0f9c38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Items/Weapons/projectiles_and_effects_256x128_SpriteSheet.png"
-dest_files=["res://.godot/imported/projectiles_and_effects_256x128_SpriteSheet.png-dde434908f15f7162760c4e231cf743c.ctex"]
+source_file="res://Textures/Items/Weapons/flecha.png"
+dest_files=["res://.godot/imported/flecha.png-dcf71c5163006a80ac4290a33b0f9c38.ctex"]
 
 [params]
 

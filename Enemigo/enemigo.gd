@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	knockback = knockback.move_toward(	Vector2.ZERO, knockback_recovery)
-	var direction = (player.global_position - (global_position - Vector2(-100, 0))).normalized()
+	var direction = (player.global_position - (global_position - Vector2(0, 0))).normalized()
 	velocity = direction*movement_speed
 	velocity += knockback
 	move_and_slide()
