@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dwud7342c4hlo"]
+[gd_scene load_steps=36 format=3 uid="uid://dwud7342c4hlo"]
 
 [ext_resource type="Script" path="res://Jugador/jugador.gd" id="1_fnw1q"]
 [ext_resource type="Texture2D" uid="uid://dgln0evj0153m" path="res://Textures/Player/run/run_1.png" id="2_lsyar"]
@@ -27,6 +27,8 @@
 [ext_resource type="Texture2D" uid="uid://smd0jts4gfp0" path="res://Textures/GUI/exp_background.png" id="25_jkg3k"]
 [ext_resource type="Texture2D" uid="uid://c8bnj6epiwxor" path="res://Textures/GUI/exp_progress.png" id="26_ulk0o"]
 [ext_resource type="AudioStream" uid="uid://cghb28mv8hcmr" path="res://Audio/SoundEffect/levelup.ogg" id="27_ylonu"]
+[ext_resource type="Texture2D" uid="uid://cuj1fks3kdmx0" path="res://Textures/GUI/healthbar.png" id="28_nh4ar"]
+[ext_resource type="Texture2D" uid="uid://d266wrusr88cy" path="res://Textures/GUI/health.png" id="29_f3am2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_awq1q"]
 animations = [{
@@ -231,6 +233,18 @@ text = "Nivel : 1
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HpBar" type="TextureProgressBar" parent="GUI/GUI"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.392157)
+texture_filter = 1
+layout_mode = 0
+offset_left = 304.0
+offset_top = 200.0
+offset_right = 336.0
+offset_bottom = 208.0
+texture_over = ExtResource("28_nh4ar")
+texture_progress = ExtResource("29_f3am2")
+
 [node name="LevelUp" type="Panel" parent="GUI/GUI"]
 unique_name_in_owner = true
 process_mode = 2
@@ -261,6 +275,24 @@ offset_bottom = 100.0
 unique_name_in_owner = true
 stream = ExtResource("27_ylonu")
 volume_db = -23.547
+
+[node name="CollectedWeapons" type="GridContainer" parent="GUI/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 20.0
+offset_right = 208.0
+offset_bottom = 36.0
+columns = 10
+
+[node name="CollectedUpgrades" type="GridContainer" parent="GUI/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 208.0
+offset_bottom = 56.0
+columns = 10
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Ataques/flechaTimer" to="." method="_on_flecha_timer_timeout"]

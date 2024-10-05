@@ -15,7 +15,7 @@ var knockback = Vector2.ZERO
 @onready var sound_hit = $sound_hit
 @onready var hitbox = $HitBox
 
-var death_anim = preload("res://Enemigo/enemigo_1_muerte.tscn")
+var death_anim = preload("res://Enemigo/goblin_scout_muerte.tscn")
 var exp = preload("res://Objetos/experiencia.tscn")
 
 signal remove_from_array(object)
@@ -33,9 +33,9 @@ func _physics_process(_delta: float) -> void:
 	
 	
 	if direction.x > 0.1:
-		sprite.flip_h = true
-	elif direction.x < 0.1:
 		sprite.flip_h = false
+	elif direction.x < 0.1:
+		sprite.flip_h = true
 
 func death():
 	emit_signal("remove_from_array", self)

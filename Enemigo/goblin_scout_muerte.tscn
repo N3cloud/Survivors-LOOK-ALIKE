@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bow8ylffgu1ht"]
+[gd_scene load_steps=7 format=3 uid="uid://dq77atetr401y"]
 
-[ext_resource type="Texture2D" uid="uid://7qlj2ejrnppc" path="res://Textures/Enemy/Bat-Die.png" id="1_agalm"]
-[ext_resource type="Script" path="res://Enemigo/enemigo_1_muerte.gd" id="2_1qx4s"]
-[ext_resource type="AudioStream" uid="uid://cyc7yqq6bebtq" path="res://Audio/SoundEffect/enemy_death.ogg" id="2_jaahi"]
+[ext_resource type="Texture2D" uid="uid://b0s24sed6j07q" path="res://Textures/Enemy/goblin scout - silhouette all animations-death 1.png" id="1_yn62o"]
+[ext_resource type="Script" path="res://Enemigo/goblin_scout_muerte.gd" id="2_p5a76"]
+[ext_resource type="AudioStream" uid="uid://cyc7yqq6bebtq" path="res://Audio/SoundEffect/enemy_death.ogg" id="3_taufc"]
 
 [sub_resource type="Animation" id="Animation_hten8"]
 length = 0.001
@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ujmdo"]
 resource_name = "explode"
-length = 0.4
+length = 0.8
 step = 0.04
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -42,14 +42,14 @@ _data = {
 "explode": SubResource("Animation_ujmdo")
 }
 
-[node name="enemigo1_muerte" type="Sprite2D"]
+[node name="goblin_scout_muerte" type="Sprite2D"]
 texture_filter = 1
-texture = ExtResource("1_agalm")
+texture = ExtResource("1_yn62o")
 hframes = 12
-script = ExtResource("2_1qx4s")
+script = ExtResource("2_p5a76")
 
 [node name="sound_death1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_jaahi")
+stream = ExtResource("3_taufc")
 pitch_scale = 0.5
 autoplay = true
 

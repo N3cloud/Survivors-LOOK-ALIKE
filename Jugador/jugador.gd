@@ -56,12 +56,17 @@ var enemy_close = []
 @onready var upgradeOptions = get_node("%UpgradeOptions")
 @onready var itemOption = preload("res://Utilidades/item_option.tscn")
 @onready var sound_levelUp = get_node("%sound_levelUp")
+@onready var healthBar = get_node("%HpBar")
+@onready var collectedWeapons = get_node("%CollectedWeapons")
+@onready var collectedUpgrades = get_node("%CollectedUpgrades")
+@onready var itemContainer = preload("res://Jugador/GUI/item_container.tscn")
 
 
 func _ready() -> void:
 	upgrade_character("flecha1")
 	attack()
 	set_expbar(experience, calculated_experiencecap())
+	_on_hurt_box_hurt(0,0,0) 
 
 func _physics_process(delta: float) -> void:
 	movement();
@@ -101,6 +106,8 @@ func attack():
 			
 func _on_hurt_box_hurt(damage: Variant, _angle, _knockback) -> void:
 	hp -= clamp(damage - armor, 1.0,999.0) 
+	healthBar.max_value = maxhp
+	healthBar.value = hp
 	print(hp)
 
 
@@ -252,10 +259,8 @@ func upgrade_character(upgrade):
 			hp += 20
 			hp = clamp(hp,0,maxhp)
 	
-	
-	
-	
-	print("Se ha llamado el método upgrade_character")
+	adjust_gui_collection_upgrade(upgrade)
+	attack()
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
 		i.queue_free()
@@ -291,3 +296,19 @@ func get_random_item():
 	else:
 		return null
 				
+
+func adjust_gui_collection_upgrade(upgrade):
+	var get_upgraded_displayname = UpgradeDb.UPGRADES[upgrade]["displayname"]
+	var get_type = UpgradeDb.UPGRADES[upgrade]["type"]
+	if get_type != "item":
+		var get_collected_displaynames = []
+		for i in collected_upgrades:
+			get_collected_displaynames.append(UpgradeDb.UPGRADES[i]["displayname"])
+		if not get_upgraded_displayname in get_collected_displaynames:
+			var new_item = itemContainer.instantiate()
+			new_item.upgrade = upgrade
+			match get_type:
+				"weapon":
+					collectedWeapons.add_child(new_item)
+				"upgrade":
+					collectedUpgrades.add_child(new_item)
