@@ -60,7 +60,13 @@ var enemy_close = []
 @onready var collectedWeapons = get_node("%CollectedWeapons")
 @onready var collectedUpgrades = get_node("%CollectedUpgrades")
 @onready var itemContainer = preload("res://Jugador/GUI/item_container.tscn")
+@onready var death_panel = get_node("%DeathPanel")
+@onready var label_result = get_node("%label_result")
+@onready var sound_victory = get_node("%sound_victory")
+@onready var sound_death = get_node("%sound_death")
 
+#Signals
+signal player_death
 
 func _ready() -> void:
 	upgrade_character("flecha1")
@@ -108,6 +114,8 @@ func _on_hurt_box_hurt(damage: Variant, _angle, _knockback) -> void:
 	hp -= clamp(damage - armor, 1.0,999.0) 
 	healthBar.max_value = maxhp
 	healthBar.value = hp
+	if hp <= 0:
+		death()
 	print(hp)
 
 
@@ -312,3 +320,19 @@ func adjust_gui_collection_upgrade(upgrade):
 					collectedWeapons.add_child(new_item)
 				"upgrade":
 					collectedUpgrades.add_child(new_item)
+					
+func death():
+	death_panel.visible = true
+	emit_signal("player_death")
+	get_tree().paused = true
+	var tween = death_panel.create_tween()
+	tween.tween_property(death_panel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.play()
+	if hp <= 0:
+		label_result.text = "GAME OVER"
+		sound_death.play()
+
+
+func _on_button_menu_click_end() -> void:
+	get_tree().paused = false
+	var _level = get_tree().change_scene_to_file("res://titleScreen/menu.tscn")
