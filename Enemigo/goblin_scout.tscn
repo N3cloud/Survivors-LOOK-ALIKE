@@ -84,8 +84,9 @@ collision_layer = 5
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_l3f4i")
-movement_speed = 30.0
-enemy_damage = 2
+movement_speed = 60.0
+hp = 15
+enemy_damage = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

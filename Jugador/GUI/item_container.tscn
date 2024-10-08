@@ -12,8 +12,8 @@ script = ExtResource("2_fqrkd")
 [node name="ItemTexture" type="TextureRect" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 30.0
-offset_bottom = 30.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 21.0
+offset_bottom = 21.0
 scale = Vector2(0.5, 0.5)

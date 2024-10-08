@@ -1,29 +1,30 @@
-[gd_scene load_steps=11 format=3 uid="uid://5hjathaik131"]
+[gd_scene load_steps=12 format=3 uid="uid://5hjathaik131"]
 
 [ext_resource type="Texture2D" uid="uid://bhyuck3vs6x1g" path="res://Textures/TX Tileset Grass.png" id="1_bg3qq"]
 [ext_resource type="PackedScene" uid="uid://dwud7342c4hlo" path="res://Jugador/jugador.tscn" id="2_jpbwj"]
 [ext_resource type="PackedScene" uid="uid://bpoiwgj27oihq" path="res://Utilidades/enemy_spawner.tscn" id="3_av52f"]
-[ext_resource type="PackedScene" uid="uid://cqgooidkhkf23" path="res://Enemigo/enemigo.tscn" id="3_wyefw"]
 [ext_resource type="Script" path="res://Utilidades/spawn_info.gd" id="4_mj78d"]
+[ext_resource type="PackedScene" uid="uid://cqgooidkhkf23" path="res://Enemigo/enemigo.tscn" id="5_bu8o4"]
 [ext_resource type="PackedScene" uid="uid://dhqtp5koj562t" path="res://Enemigo/goblin_scout.tscn" id="6_g0pgk"]
 [ext_resource type="AudioStream" uid="uid://dh54im58pptag" path="res://Audio/Music/battleThemeA.mp3" id="7_33eg1"]
+[ext_resource type="PackedScene" uid="uid://753w1it0t6wy" path="res://Objetos/experiencia.tscn" id="7_m1aeb"]
 [ext_resource type="Script" path="res://Audio/Music/sound_music.gd" id="8_7y8en"]
-
-[sub_resource type="Resource" id="Resource_qxtp4"]
-script = ExtResource("4_mj78d")
-time_start = 0
-time_end = 30
-enemy = ExtResource("3_wyefw")
-enemy_num = 2
-enemy_spawn_delay = 0
-spawn_delay_counter = 0
 
 [sub_resource type="Resource" id="Resource_2nkof"]
 script = ExtResource("4_mj78d")
 time_start = 0
 time_end = 30
+enemy = ExtResource("5_bu8o4")
+enemy_num = 1
+enemy_spawn_delay = 0
+spawn_delay_counter = 0
+
+[sub_resource type="Resource" id="Resource_7owvu"]
+script = ExtResource("4_mj78d")
+time_start = 30
+time_end = 60
 enemy = ExtResource("6_g0pgk")
-enemy_num = 2
+enemy_num = 1
 enemy_spawn_delay = 0
 spawn_delay_counter = 0
 
@@ -41,7 +42,11 @@ region_rect = Rect2(-4000, -4000, 4000, 4000)
 [node name="Jugador" parent="." groups=["jugador"] instance=ExtResource("2_jpbwj")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_av52f")]
-spawns = Array[ExtResource("4_mj78d")]([SubResource("Resource_qxtp4"), SubResource("Resource_2nkof")])
+spawns = Array[ExtResource("4_mj78d")]([SubResource("Resource_2nkof"), SubResource("Resource_7owvu")])
+
+[node name="Experiencia" parent="EnemySpawner" instance=ExtResource("7_m1aeb")]
+position = Vector2(116, -76)
+experience = 10
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 

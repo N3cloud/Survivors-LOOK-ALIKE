@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Utilidades/item_option.gd" id="1_aix42"]
 [ext_resource type="Texture2D" uid="uid://bf83kgkks7qfm" path="res://Textures/Items/Weapons/sword.png" id="1_y8qtd"]
-[ext_resource type="FontFile" uid="uid://vo476qk1feln" path="res://Font/tenderness.otf" id="3_gxuo7"]
+[ext_resource type="FontFile" uid="uid://t2p7r82007sp" path="res://Font/m6x11.ttf" id="3_n6cq6"]
 
 [node name="ItemOption" type="ColorRect" groups=["jugador"]]
 custom_minimum_size = Vector2(180, 50)
@@ -34,7 +34,7 @@ offset_left = 39.0
 offset_top = -2.0
 offset_right = 81.0
 offset_bottom = 21.0
-theme_override_fonts/font = ExtResource("3_gxuo7")
+theme_override_fonts/font = ExtResource("3_n6cq6")
 theme_override_font_sizes/font_size = 14
 text = "nombre"
 horizontal_alignment = 1
@@ -47,7 +47,7 @@ offset_left = 4.0
 offset_top = 27.0
 offset_right = 166.0
 offset_bottom = 48.0
-theme_override_fonts/font = ExtResource("3_gxuo7")
+theme_override_fonts/font = ExtResource("3_n6cq6")
 theme_override_font_sizes/font_size = 8
 text = "descripcion del item"
 autowrap_mode = 3
@@ -59,7 +59,7 @@ offset_left = 130.0
 offset_top = 3.0
 offset_right = 181.0
 offset_bottom = 26.0
-theme_override_fonts/font = ExtResource("3_gxuo7")
+theme_override_fonts/font = ExtResource("3_n6cq6")
 theme_override_font_sizes/font_size = 12
 text = "nivel 1"
 

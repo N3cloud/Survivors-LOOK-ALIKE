@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var movement_speed = 50.0
+var movement_speed = 25.0
 var hp = 80
 var maxhp = 80
 var last_movement = Vector2.UP
@@ -48,6 +48,7 @@ var enemy_close = []
 @onready var sprite = $Sprite2D
 @onready var walkTimer = get_node("%walkTimer")
 @onready var anim = $Sprite2D/AnimatedSprite2D
+@onready var joystick = get_node("%Joystick")
 
 #GUI
 @onready var expBar = get_node("%ExpProgressBar")
@@ -69,13 +70,20 @@ var enemy_close = []
 signal player_death
 
 func _ready() -> void:
+	joystick.visible = true
 	upgrade_character("flecha1")
 	attack()
 	set_expbar(experience, calculated_experiencecap())
 	_on_hurt_box_hurt(0,0,0) 
 
 func _physics_process(delta: float) -> void:
-	movement();
+	movement()
+	var movement_vector = joystick.get_movement_vector()  # Obtén el vector de movimiento del joystick
+	
+	if movement_vector != Vector2.ZERO:  # Si hay entrada del joystick, la usamos
+		velocity = movement_vector * movement_speed
+		
+	move_and_slide()  # Aplica la velocidad para mover al jugador
 	
 func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -215,7 +223,7 @@ func levelup():
 	sound_levelUp.play()
 	label_level.text = str("Nivel: ",experience_level)
 	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel,"position", Vector2(220,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(levelPanel,"position", Vector2(250,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
 	var options = 0
