@@ -20,8 +20,7 @@ var circulofuego = preload("res://Jugador/Ataques/circulo_de_fuego.tscn")
 @onready var flechaAttackTimer = get_node("%flechaAttackTimer")
 @onready var arma2Timer = get_node("%arma2Timer")
 @onready var arma2AtaqueTimer = get_node("%armar2AtaqueTimer")
-@onready var circulofuegoTimer = get_node("%circulofuegoTimer")
-@onready var circulofuegoAtaqueTimer = get_node("%circulofuegoAtaqueTimer")
+@onready var circuloFuegoBase = get_node("%circuloFuegoBase")
 
 #UPGRADES
 var collected_upgrades = []
@@ -46,8 +45,6 @@ var arma2_level = 0
 
 #Circulo de fuego
 var circulofuego_ammo = 0
-var circulofuego_base_ammo = 0
-var circulofuego_attack_speed = 0
 var circulofuego_level = 0
 
 #Enemigos related
@@ -119,9 +116,7 @@ func attack():
 		if arma2Timer.is_stopped():
 			arma2Timer.start()
 	if circulofuego_level > 0:
-		circulofuegoTimer.wait_time = circulofuego_attack_speed * (1-spell_cooldown)
-		if circulofuegoTimer.is_stopped():
-			circulofuegoTimer.start()
+		spawn_circulofuego()
 			
 func _on_hurt_box_hurt(damage: Variant, _angle, _knockback) -> void:
 	hp -= clamp(damage - armor, 1.0,999.0) 
@@ -167,28 +162,37 @@ func _on_armar_2_ataque_timer_timeout() -> void:
 		else:
 			arma2AtaqueTimer.stop()
 
-func _on_circulofuego_timer_timeout() -> void:
-	circulofuego_ammo += circulofuego_base_ammo + aditional_attacks
-	circulofuegoAtaqueTimer.start()
-
-
-func _on_circulofuego_ataque_timer_timeout() -> void:
-	if circulofuego_ammo > 0:
-		var circulofuego_attack = circulofuego.instantiate()
-		circulofuego_attack.position = position + Vector2(0, -50).rotated(rotation)  # Posiciona el círculo de fuego alrededor del jugador
-		circulofuego_attack.level = circulofuego_level  # Ajusta según tu lógica
-		add_child(circulofuego_attack)
-		circulofuego_ammo -= 1
-		if circulofuego_ammo > 0:
-			circulofuegoAtaqueTimer.start()
-		else:
-			circulofuegoAtaqueTimer.stop()
+func spawn_circulofuego():
+	var get_circulofuego_total = circuloFuegoBase.get_child_count()
+	var calculate_spawns = (circulofuego_ammo + aditional_attacks) - get_circulofuego_total
+	while calculate_spawns > 0:
+		var circulofuego_spawn = circulofuego.instantiate()
+		circulofuego_spawn.global_position = global_position
+		circuloFuegoBase.add_child(circulofuego_spawn)
+		calculate_spawns -= 1
+	#Mejorar
+	var get_circulofuego = circuloFuegoBase.get_children()
+	for i in get_circulofuego:
+		if i.has_method("update_circulofuego"):
+			i.update_circulofuego()
 	
 func get_random_target():
-	if enemy_close.size() > 0:
-		return enemy_close.pick_random().global_position
+	var closest_enemy = null
+	var closest_distance = INF  # Usamos un valor infinito para iniciar
+
+	for enemy in enemy_close:  # Asumiendo que enemy_close es un array de enemigos
+		var distance = global_position.distance_to(enemy.global_position)
+		
+		# Comparamos la distancia del enemigo actual con la más cercana
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_enemy = enemy
+
+	# Si encontramos un enemigo más cercano, devolvemos su posición, de lo contrario, devolvemos un valor predeterminado
+	if closest_enemy:
+		return closest_enemy.global_position
 	else:
-		return Vector2.UP
+		return Vector2.UP  # O cualquier valor predeterminado que desees
 
 
 func _on_enemy_detection_area_body_entered(body: Node2D) -> void:
@@ -245,7 +249,7 @@ func levelup():
 	sound_levelUp.play()
 	label_level.text = str("Nivel: ",experience_level)
 	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel,"position", Vector2(220,55),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(levelPanel,"position", Vector2(250,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
 	var options = 0
@@ -285,7 +289,7 @@ func upgrade_character(upgrade):
 			arma2_base_ammo += 1
 		"fuego1":
 			circulofuego_level = 1
-			circulofuego_base_ammo += 1
+			circulofuego_ammo += 1
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":
@@ -359,7 +363,7 @@ func death():
 	emit_signal("player_death")
 	get_tree().paused = true
 	var tween = death_panel.create_tween()
-	tween.tween_property(death_panel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(death_panel,"position",Vector2(250,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
 	if hp <= 0:
 		label_result.text = "GAME OVER"

@@ -33,6 +33,7 @@ window/stretch/aspect="expand"
 jugador=""
 attack="ataques"
 loot=""
+enemigos=""
 
 [input]
 
