@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var movement_speed = 25.0
+var movement_speed = 45.0
 var hp = 80
 var maxhp = 80
 var last_movement = Vector2.UP
@@ -13,12 +13,15 @@ var collected_experience = 0
 #Ataques
 var flecha = preload("res://Jugador/Ataques/flecha.tscn")
 var arma2 = preload("res://Jugador/Ataques/arma_2.tscn")
+var circulofuego = preload("res://Jugador/Ataques/circulo_de_fuego.tscn")
 
 #Ataque Nodos
 @onready var flechaTimer = get_node("%flechaTimer")
 @onready var flechaAttackTimer = get_node("%flechaAttackTimer")
 @onready var arma2Timer = get_node("%arma2Timer")
 @onready var arma2AtaqueTimer = get_node("%armar2AtaqueTimer")
+@onready var circulofuegoTimer = get_node("%circulofuegoTimer")
+@onready var circulofuegoAtaqueTimer = get_node("%circulofuegoAtaqueTimer")
 
 #UPGRADES
 var collected_upgrades = []
@@ -41,6 +44,12 @@ var arma2_base_ammo = 0
 var arma2_attack_speed = 3
 var arma2_level = 0
 
+#Circulo de fuego
+var circulofuego_ammo = 0
+var circulofuego_base_ammo = 0
+var circulofuego_attack_speed = 0
+var circulofuego_level = 0
+
 #Enemigos related
 
 var enemy_close = []
@@ -48,7 +57,6 @@ var enemy_close = []
 @onready var sprite = $Sprite2D
 @onready var walkTimer = get_node("%walkTimer")
 @onready var anim = $Sprite2D/AnimatedSprite2D
-@onready var joystick = get_node("%Joystick")
 
 #GUI
 @onready var expBar = get_node("%ExpProgressBar")
@@ -70,7 +78,6 @@ var enemy_close = []
 signal player_death
 
 func _ready() -> void:
-	joystick.visible = true
 	upgrade_character("flecha1")
 	attack()
 	set_expbar(experience, calculated_experiencecap())
@@ -78,12 +85,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	movement()
-	var movement_vector = joystick.get_movement_vector()  # Obtén el vector de movimiento del joystick
-	
-	if movement_vector != Vector2.ZERO:  # Si hay entrada del joystick, la usamos
-		velocity = movement_vector * movement_speed
-		
-	move_and_slide()  # Aplica la velocidad para mover al jugador
 	
 func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -117,6 +118,10 @@ func attack():
 		arma2Timer.wait_time = arma2_attack_speed * (1-spell_cooldown)
 		if arma2Timer.is_stopped():
 			arma2Timer.start()
+	if circulofuego_level > 0:
+		circulofuegoTimer.wait_time = circulofuego_attack_speed * (1-spell_cooldown)
+		if circulofuegoTimer.is_stopped():
+			circulofuegoTimer.start()
 			
 func _on_hurt_box_hurt(damage: Variant, _angle, _knockback) -> void:
 	hp -= clamp(damage - armor, 1.0,999.0) 
@@ -161,7 +166,24 @@ func _on_armar_2_ataque_timer_timeout() -> void:
 			arma2AtaqueTimer.start()
 		else:
 			arma2AtaqueTimer.stop()
-		
+
+func _on_circulofuego_timer_timeout() -> void:
+	circulofuego_ammo += circulofuego_base_ammo + aditional_attacks
+	circulofuegoAtaqueTimer.start()
+
+
+func _on_circulofuego_ataque_timer_timeout() -> void:
+	if circulofuego_ammo > 0:
+		var circulofuego_attack = circulofuego.instantiate()
+		circulofuego_attack.position = position + Vector2(0, -50).rotated(rotation)  # Posiciona el círculo de fuego alrededor del jugador
+		circulofuego_attack.level = circulofuego_level  # Ajusta según tu lógica
+		add_child(circulofuego_attack)
+		circulofuego_ammo -= 1
+		if circulofuego_ammo > 0:
+			circulofuegoAtaqueTimer.start()
+		else:
+			circulofuegoAtaqueTimer.stop()
+	
 func get_random_target():
 	if enemy_close.size() > 0:
 		return enemy_close.pick_random().global_position
@@ -223,7 +245,7 @@ func levelup():
 	sound_levelUp.play()
 	label_level.text = str("Nivel: ",experience_level)
 	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel,"position", Vector2(250,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(levelPanel,"position", Vector2(220,55),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
 	var options = 0
@@ -261,6 +283,9 @@ func upgrade_character(upgrade):
 		"dark4":
 			arma2_level = 4
 			arma2_base_ammo += 1
+		"fuego1":
+			circulofuego_level = 1
+			circulofuego_base_ammo += 1
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":

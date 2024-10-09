@@ -53,9 +53,13 @@ func _ready() -> void:
 		Vector2.RIGHT,Vector2.LEFT:
 			move_to_less = global_position + Vector2(last_movement.x, randf_range(-1, -0.25),)*500
 			move_to_more = global_position + Vector2(last_movement.x, randf_range(0.25, 1), )*500
-		Vector2(1,1),Vector2(-1,-1), Vector2(1,-1),Vector2(-1,1):
-			move_to_less = global_position + Vector2(last_movement.x, last_movement.y * randf_range(0,0.75)) * 500
-			move_to_more = global_position + Vector2(last_movement.x * randf_range(0,0.75) ,last_movement.y) * 500	
+			if last_movement.x < 0:  # Movimiento hacia la izquierda
+				anim.flip_h = true  # Voltear el sprite
+			else:  # Movimiento hacia la derecha
+				anim.flip_h = false  # Mantener la escala normal
+		Vector2(1, 1), Vector2(-1, -1), Vector2(1, -1), Vector2(-1, 1):
+			move_to_less = global_position + Vector2(last_movement.x, last_movement.y * randf_range(0, 0.75)) * 500
+			move_to_more = global_position + Vector2(last_movement.x * randf_range(0, 0.75), last_movement.y) * 500    
 			
 	angle_less = global_position.direction_to(move_to_less)	
 	angle_more = global_position.direction_to(move_to_more)

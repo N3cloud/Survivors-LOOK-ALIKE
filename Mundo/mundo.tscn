@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://5hjathaik131"]
+[gd_scene load_steps=14 format=3 uid="uid://5hjathaik131"]
 
 [ext_resource type="Texture2D" uid="uid://bhyuck3vs6x1g" path="res://Textures/TX Tileset Grass.png" id="1_bg3qq"]
 [ext_resource type="PackedScene" uid="uid://dwud7342c4hlo" path="res://Jugador/jugador.tscn" id="2_jpbwj"]
@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cqgooidkhkf23" path="res://Enemigo/enemigo.tscn" id="5_bu8o4"]
 [ext_resource type="PackedScene" uid="uid://dhqtp5koj562t" path="res://Enemigo/goblin_scout.tscn" id="6_g0pgk"]
 [ext_resource type="AudioStream" uid="uid://dh54im58pptag" path="res://Audio/Music/battleThemeA.mp3" id="7_33eg1"]
-[ext_resource type="PackedScene" uid="uid://753w1it0t6wy" path="res://Objetos/experiencia.tscn" id="7_m1aeb"]
 [ext_resource type="Script" path="res://Audio/Music/sound_music.gd" id="8_7y8en"]
+[ext_resource type="PackedScene" uid="uid://duk6vj5xxv535" path="res://Utilidades/touch_control.tscn" id="9_e6vd4"]
 
 [sub_resource type="Resource" id="Resource_2nkof"]
 script = ExtResource("4_mj78d")
@@ -23,7 +23,25 @@ spawn_delay_counter = 0
 script = ExtResource("4_mj78d")
 time_start = 30
 time_end = 60
+enemy = ExtResource("5_bu8o4")
+enemy_num = 2
+enemy_spawn_delay = 10
+spawn_delay_counter = 0
+
+[sub_resource type="Resource" id="Resource_xfssn"]
+script = ExtResource("4_mj78d")
+time_start = 60
+time_end = 120
 enemy = ExtResource("6_g0pgk")
+enemy_num = 1
+enemy_spawn_delay = 0
+spawn_delay_counter = 0
+
+[sub_resource type="Resource" id="Resource_8mky5"]
+script = ExtResource("4_mj78d")
+time_start = 60
+time_end = 120
+enemy = ExtResource("5_bu8o4")
 enemy_num = 1
 enemy_spawn_delay = 0
 spawn_delay_counter = 0
@@ -42,11 +60,7 @@ region_rect = Rect2(-4000, -4000, 4000, 4000)
 [node name="Jugador" parent="." groups=["jugador"] instance=ExtResource("2_jpbwj")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_av52f")]
-spawns = Array[ExtResource("4_mj78d")]([SubResource("Resource_2nkof"), SubResource("Resource_7owvu")])
-
-[node name="Experiencia" parent="EnemySpawner" instance=ExtResource("7_m1aeb")]
-position = Vector2(116, -76)
-experience = 10
+spawns = Array[ExtResource("4_mj78d")]([SubResource("Resource_2nkof"), SubResource("Resource_7owvu"), SubResource("Resource_xfssn"), SubResource("Resource_8mky5")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
@@ -57,5 +71,13 @@ volume_db = -25.0
 autoplay = true
 parameters/looping = true
 script = ExtResource("8_7y8en")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TouchControl" parent="Control" instance=ExtResource("9_e6vd4")]
 
 [connection signal="player_death" from="Jugador" to="sound_music" method="_on_jugador_player_death"]

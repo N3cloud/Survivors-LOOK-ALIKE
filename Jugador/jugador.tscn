@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dwud7342c4hlo"]
+[gd_scene load_steps=39 format=3 uid="uid://dwud7342c4hlo"]
 
 [ext_resource type="Script" path="res://Jugador/jugador.gd" id="1_fnw1q"]
 [ext_resource type="Texture2D" uid="uid://dgln0evj0153m" path="res://Textures/Player/run/run_1.png" id="2_lsyar"]
@@ -32,9 +32,6 @@
 [ext_resource type="AudioStream" uid="uid://cvrnaxuvnuntd" path="res://Audio/SoundEffect/Lose.ogg" id="30_7blyf"]
 [ext_resource type="AudioStream" uid="uid://cgv71dy0tutqy" path="res://Audio/SoundEffect/Victory.wav" id="31_3074p"]
 [ext_resource type="PackedScene" uid="uid://cr2qefm64geka" path="res://Utilidades/basic_button.tscn" id="32_hywoa"]
-[ext_resource type="Script" path="res://Jugador/joystick.gd" id="33_wogni"]
-[ext_resource type="Texture2D" uid="uid://30a6wkt7txti" path="res://Textures/GUI/gamepad7_2.png" id="34_lfsss"]
-[ext_resource type="Texture2D" uid="uid://dj0s8gaanmab5" path="res://Textures/GUI/gamepad7_1.png" id="35_d37pt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_awq1q"]
 animations = [{
@@ -189,6 +186,13 @@ wait_time = 3.0
 unique_name_in_owner = true
 wait_time = 0.2
 
+[node name="circulofuegoTimer" type="Timer" parent="Ataques"]
+unique_name_in_owner = true
+
+[node name="circulofuegoAtaqueTimer" type="Timer" parent="Ataques/circulofuegoTimer"]
+unique_name_in_owner = true
+wait_time = 0.5
+
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 4
@@ -268,6 +272,7 @@ texture_progress = ExtResource("29_f3am2")
 [node name="LevelUp" type="Panel" parent="GUI/GUI"]
 unique_name_in_owner = true
 process_mode = 2
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -372,34 +377,13 @@ offset_bottom = -84.0
 grow_vertical = 2
 columns = 10
 
-[node name="Joystick" type="Control" parent="GUI/GUI"]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 0
-offset_left = 39.0
-offset_top = 152.0
-offset_right = 119.0
-offset_bottom = 232.0
-script = ExtResource("33_wogni")
-
-[node name="JoystickHandle" type="Sprite2D" parent="GUI/GUI/Joystick"]
-texture_filter = 1
-position = Vector2(39.5, 41)
-scale = Vector2(1.77083, 1.79167)
-texture = ExtResource("34_lfsss")
-
-[node name="JoystickBackground" type="Sprite2D" parent="GUI/GUI/Joystick"]
-modulate = Color(1, 1, 1, 0.580392)
-texture_filter = 1
-position = Vector2(40, 40.5)
-scale = Vector2(1.79167, 1.77083)
-texture = ExtResource("35_d37pt")
-
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Ataques/flechaTimer" to="." method="_on_flecha_timer_timeout"]
 [connection signal="timeout" from="Ataques/flechaTimer/flechaAttackTimer" to="." method="_on_flecha_attack_timer_timeout"]
 [connection signal="timeout" from="Ataques/arma2Timer" to="." method="_on_arma_2_timer_timeout"]
 [connection signal="timeout" from="Ataques/arma2Timer/armar2AtaqueTimer" to="." method="_on_armar_2_ataque_timer_timeout"]
+[connection signal="timeout" from="Ataques/circulofuegoTimer" to="." method="_on_circulofuego_timer_timeout"]
+[connection signal="timeout" from="Ataques/circulofuegoTimer/circulofuegoAtaqueTimer" to="." method="_on_circulofuego_ataque_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]

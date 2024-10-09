@@ -8,6 +8,7 @@ var spr_red = preload("res://Textures/Items/Gems/Gem_red.png")
 
 var target = null
 var speed = 0
+var MAX_SPEED = 30.0
 
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
@@ -24,7 +25,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if target != null:
 		global_position = global_position.move_toward(target.global_position, speed)	
-		speed += 2*delta	
+		speed = min(speed + 2 * delta, MAX_SPEED)
 		
 func collect():
 	sound.play()	
