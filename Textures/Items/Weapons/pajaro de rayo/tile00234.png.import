@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj0s8gaanmab5"
-path="res://.godot/imported/gamepad7_1.png-10487163fa0e3e7a2f3b53fbe81978d0.ctex"
+uid="uid://d4ju46ynhvga8"
+path="res://.godot/imported/tile00234.png-bc88569963f4e1ad2de997fc3274f0db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/GUI/gamepad7_1.png"
-dest_files=["res://.godot/imported/gamepad7_1.png-10487163fa0e3e7a2f3b53fbe81978d0.ctex"]
+source_file="res://Textures/Items/Weapons/pajaro de rayo/tile00234.png"
+dest_files=["res://.godot/imported/tile00234.png-bc88569963f4e1ad2de997fc3274f0db.ctex"]
 
 [params]
 

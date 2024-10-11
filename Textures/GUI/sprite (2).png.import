@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx2u7ko0gveib"
-path="res://.godot/imported/Firebolt SpriteSheet.png-11b91cbc0dcb6009f205cc5c07fff44c.ctex"
+uid="uid://1f2ntlsanwn5"
+path="res://.godot/imported/sprite (2).png-e9d59f9c9d7b68df947cdae3d4683eeb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Items/Weapons/Firebolt SpriteSheet.png"
-dest_files=["res://.godot/imported/Firebolt SpriteSheet.png-11b91cbc0dcb6009f205cc5c07fff44c.ctex"]
+source_file="res://Textures/GUI/sprite (2).png"
+dest_files=["res://.godot/imported/sprite (2).png-e9d59f9c9d7b68df947cdae3d4683eeb.ctex"]
 
 [params]
 

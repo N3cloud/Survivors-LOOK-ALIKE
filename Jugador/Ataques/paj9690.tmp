@@ -1,0 +1,94 @@
+[gd_scene load_steps=19 format=3 uid="uid://bvs45emmh017e"]
+
+[ext_resource type="Texture2D" uid="uid://dmlqptyj32mtl" path="res://Textures/Items/Weapons/pajaro de rayo/thunder2.png" id="1_7o58n"]
+[ext_resource type="Script" path="res://Jugador/Ataques/pajarorayo.gd" id="1_ep5u8"]
+[ext_resource type="Texture2D" uid="uid://b5rk3qhprl301" path="res://Textures/Items/Weapons/pajaro de rayo/thunder3 (1).png" id="2_qcy5c"]
+[ext_resource type="Texture2D" uid="uid://b6yee10p1084y" path="res://Textures/Items/Weapons/pajaro de rayo/thunder3 (2).png" id="3_iqy65"]
+[ext_resource type="Texture2D" uid="uid://chp2gts3p8ug8" path="res://Textures/Items/Weapons/pajaro de rayo/thunder3 (3).png" id="4_4w2t6"]
+[ext_resource type="Texture2D" uid="uid://wauqoa68feda" path="res://Textures/Items/Weapons/pajaro de rayo/thunder3 (4).png" id="5_xq5om"]
+[ext_resource type="Texture2D" uid="uid://04xeemisjmnv" path="res://Textures/Items/Weapons/pajaro de rayo/thunder3 (5).png" id="6_1ug1d"]
+[ext_resource type="Texture2D" uid="uid://jwqcakktyi46" path="res://Textures/Items/Weapons/pajaro de rayo/thunder3.png" id="7_wh84t"]
+[ext_resource type="Texture2D" uid="uid://bou3ogvn4dkjp" path="res://Textures/Items/Weapons/pajaro de rayo/tile000.png" id="8_8mfi6"]
+[ext_resource type="Texture2D" uid="uid://upqwnoafyh1x" path="res://Textures/Items/Weapons/pajaro de rayo/tile001.png" id="9_fdrd8"]
+[ext_resource type="Texture2D" uid="uid://cw41ca0g3w4w7" path="res://Textures/Items/Weapons/pajaro de rayo/tile002.png" id="10_714jx"]
+[ext_resource type="Texture2D" uid="uid://b5pg63bfsusn8" path="res://Textures/Items/Weapons/pajaro de rayo/tile0023.png" id="11_qj8je"]
+[ext_resource type="Texture2D" uid="uid://d4ju46ynhvga8" path="res://Textures/Items/Weapons/pajaro de rayo/tile00234.png" id="12_b5yj6"]
+[ext_resource type="Texture2D" uid="uid://t3akr8tuyuhu" path="res://Textures/Items/Weapons/pajaro de rayo/tile002345.png" id="13_8lat0"]
+[ext_resource type="Texture2D" uid="uid://6k4rw4acy3wf" path="res://Textures/Items/Weapons/pajaro de rayo/tile0023456.png" id="14_au0ee"]
+[ext_resource type="Texture2D" uid="uid://rg7cidyf02al" path="res://Textures/Items/Weapons/pajaro de rayo/tile00234567.png" id="15_vxtjc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7d67n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7o58n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qcy5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_iqy65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4w2t6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xq5om")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1ug1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wh84t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8mfi6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fdrd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_714jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qj8je")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_b5yj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8lat0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_au0ee")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_vxtjc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o1pyh"]
+radius = 17.0294
+
+[node name="Pajaro_rayo" type="Area2D" groups=["attack"]]
+script = ExtResource("1_ep5u8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_7d67n")
+frame_progress = 0.104034
+speed_scale = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o1pyh")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

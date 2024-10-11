@@ -70,11 +70,27 @@ const UPGRADES = {
 	},
 	"fuego1": {
 		"icon": ALL_PATH + "spellbook_03e.png",
-		"displayname": "Circulo solar(ESTA BUGUEADO NO USAR O CRASH)",
+		"displayname": "Circulo solar",
 		"details": "Un circulo de fuego orbita alrededor del jugador",
 		"level": "Nivel: 1",
 		"prerequisite": [],
 		"type": "weapon"
+	},
+	"rayo1": {
+		"icon": ALL_PATH + "spellbook_03e.png",
+		"displayname": "Alas de trueno",
+		"details": "Un ave ataca a un enemigo aleatorio",
+		"level": "Nivel: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"regeneracion1": {
+		"icon": ALL_PATH + "spellbook_03e.png",
+		"displayname": "Regeneración",
+		"details": "Regenera 0.1 de vida por segundo",
+		"level": "Nivel: 1",
+		"prerequisite": [],
+		"type": "item"
 	},
 	"armor1": {
 		"icon": ICON_PATH + "helmet_1.png",

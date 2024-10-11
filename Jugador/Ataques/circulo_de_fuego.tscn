@@ -1,10 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://dytg0tgmmvd18"]
+[gd_scene load_steps=8 format=3 uid="uid://dytg0tgmmvd18"]
 
 [ext_resource type="Script" path="res://Jugador/Ataques/circulo_de_fuego.gd" id="1_i7k2o"]
-[ext_resource type="Texture2D" uid="uid://dx2u7ko0gveib" path="res://Textures/Items/Weapons/Firebolt SpriteSheet.png" id="2_xwpv2"]
+[ext_resource type="Texture2D" uid="uid://b83jk3qh6xxh7" path="res://Textures/Items/Weapons/Circulo fuego/tile000.png" id="2_dfrtn"]
+[ext_resource type="Texture2D" uid="uid://r5i8pp2g7esv" path="res://Textures/Items/Weapons/Circulo fuego/tile001.png" id="3_7l1n7"]
+[ext_resource type="Texture2D" uid="uid://bdjceu5yfhmrj" path="res://Textures/Items/Weapons/Circulo fuego/tile002.png" id="4_nsog2"]
+[ext_resource type="Texture2D" uid="uid://d0noswvurpbnw" path="res://Textures/Items/Weapons/Circulo fuego/tile003.png" id="5_x1mpu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r73w4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dfrtn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7l1n7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nsog2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_x1mpu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vqtt"]
-size = Vector2(26, 9)
+size = Vector2(23, 7)
 
 [node name="Circulo de fuego" type="Area2D" groups=["attack"]]
 collision_layer = 4
@@ -13,11 +36,18 @@ script = ExtResource("1_i7k2o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_xwpv2")
 hframes = 9
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+position = Vector2(-1, 9)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_r73w4")
+frame_progress = 0.429772
+speed_scale = 2.0
+flip_v = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 6.5)
+position = Vector2(1.5, 4.5)
 shape = SubResource("RectangleShape2D_3vqtt")
 
 [node name="Timer" type="Timer" parent="."]

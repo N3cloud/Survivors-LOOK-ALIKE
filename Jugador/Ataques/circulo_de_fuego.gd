@@ -16,6 +16,7 @@ var attack_delay = 1.0  # Tiempo entre ataques en segundos
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
 @onready var timer = $Timer
+@onready var anim = $Sprite2D/AnimatedSprite2D
 
 signal remove_from_array(object)
 
@@ -53,6 +54,7 @@ func update_circulofuego():
 func _physics_process(delta: float) -> void:
 	# Rotar alrededor del jugador
 	angle = angle.rotated(rotation_speed * delta)  # Rotar el vector de dirección
+	anim.play("default")  
 	var radius = 50  # Radio del círculo de fuego
 	global_position = player.global_position + angle * radius  # Actualiza la posición en base al ángulo
 	

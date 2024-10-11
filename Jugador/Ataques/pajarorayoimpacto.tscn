@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cemo8u0n41eq5"]
+
+[ext_resource type="Texture2D" uid="uid://qrfe1i788gsl" path="res://Textures/Items/Weapons/pajaro de rayo/impacto/Thunder hit w blur.png" id="1_7iecl"]
+[ext_resource type="Script" path="res://Jugador/Ataques/pajarorayoimpacto.gd" id="1_nh8y7"]
+
+[sub_resource type="Animation" id="Animation_hten8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ujmdo"]
+resource_name = "explode"
+length = 0.8
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_340vi"]
+_data = {
+"RESET": SubResource("Animation_hten8"),
+"explode": SubResource("Animation_ujmdo")
+}
+
+[node name="pajarorayoimpacto" type="Sprite2D"]
+top_level = true
+texture_filter = 1
+texture = ExtResource("1_7iecl")
+hframes = 6
+script = ExtResource("1_nh8y7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_340vi")
+}
+speed_scale = 0.789
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

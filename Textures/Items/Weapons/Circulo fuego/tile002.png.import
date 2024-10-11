@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0ggisknam2uk"
-path="res://.godot/imported/04.png-15a8089fa01e5761b8ae250174322c8b.ctex"
+uid="uid://bdjceu5yfhmrj"
+path="res://.godot/imported/tile002.png-df8fbc12b6cd5fc164242b484c304035.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/GUI/04.png"
-dest_files=["res://.godot/imported/04.png-15a8089fa01e5761b8ae250174322c8b.ctex"]
+source_file="res://Textures/Items/Weapons/Circulo fuego/tile002.png"
+dest_files=["res://.godot/imported/tile002.png-df8fbc12b6cd5fc164242b484c304035.ctex"]
 
 [params]
 

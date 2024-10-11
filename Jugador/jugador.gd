@@ -10,10 +10,15 @@ var experience = 0
 var experience_level = 1
 var collected_experience = 0
 
+var health_regeneration_rate = 0  # Regeneración de salud por segundo
+var regeneration_timer = 0.0  # Temporizador para la regeneración
+
+
 #Ataques
 var flecha = preload("res://Jugador/Ataques/flecha.tscn")
 var arma2 = preload("res://Jugador/Ataques/arma_2.tscn")
 var circulofuego = preload("res://Jugador/Ataques/circulo_de_fuego.tscn")
+var pajarorayo = preload("res://Jugador/Ataques/pajarorayo.tscn")
 
 #Ataque Nodos
 @onready var flechaTimer = get_node("%flechaTimer")
@@ -21,6 +26,9 @@ var circulofuego = preload("res://Jugador/Ataques/circulo_de_fuego.tscn")
 @onready var arma2Timer = get_node("%arma2Timer")
 @onready var arma2AtaqueTimer = get_node("%armar2AtaqueTimer")
 @onready var circuloFuegoBase = get_node("%circuloFuegoBase")
+@onready var pajarorayoTimer = get_node("%pajarorayoTimer")
+@onready var pajarorayoAtaqueTimer = get_node("%pajarorayoAtaqueTimer")
+
 
 #UPGRADES
 var collected_upgrades = []
@@ -46,6 +54,13 @@ var arma2_level = 0
 #Circulo de fuego
 var circulofuego_ammo = 0
 var circulofuego_level = 0
+
+#Pajaro de rayo
+var pajarorayo_ammo = 0
+var pajarorayo_base_ammo = 0
+var pajarorayo_level = 0
+var pajarorayo_attack_speed = 2
+
 
 #Enemigos related
 
@@ -76,13 +91,25 @@ signal player_death
 
 func _ready() -> void:
 	upgrade_character("flecha1")
+	upgrade_character("rayo1")
 	attack()
 	set_expbar(experience, calculated_experiencecap())
 	_on_hurt_box_hurt(0,0,0) 
 
 func _physics_process(delta: float) -> void:
 	movement()
+	regenerate_health(delta)
 	
+func regenerate_health(delta: float) -> void:
+	if hp < maxhp:
+		regeneration_timer += delta
+		if regeneration_timer >= 1.0:  # Cada segundo
+			hp += health_regeneration_rate
+			hp = clamp(hp, 0, maxhp)  # Asegúrate de que no supere el máximo
+			healthBar.value = hp  # Actualiza la barra de salud
+			regeneration_timer = 0.0  # Reinicia el temporizador
+			print(hp)
+			
 func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -117,6 +144,10 @@ func attack():
 			arma2Timer.start()
 	if circulofuego_level > 0:
 		spawn_circulofuego()
+	if pajarorayo_level > 0:
+		pajarorayoTimer.wait_time = pajarorayo_attack_speed * (1-spell_cooldown)
+		if pajarorayoTimer.is_stopped():
+			pajarorayoTimer.start()
 			
 func _on_hurt_box_hurt(damage: Variant, _angle, _knockback) -> void:
 	hp -= clamp(damage - armor, 1.0,999.0) 
@@ -144,10 +175,12 @@ func _on_flecha_attack_timer_timeout() -> void:
 			flechaAttackTimer.start()
 		else:
 			flechaAttackTimer.stop()
+	
 		
 func _on_arma_2_timer_timeout() -> void:
 	arma2_ammo += arma2_base_ammo + aditional_attacks
 	arma2AtaqueTimer.start()
+	
 
 func _on_armar_2_ataque_timer_timeout() -> void:
 	if arma2_ammo > 0:
@@ -175,6 +208,40 @@ func spawn_circulofuego():
 	for i in get_circulofuego:
 		if i.has_method("update_circulofuego"):
 			i.update_circulofuego()
+
+func _on_pajarorayo_timer_timeout() -> void:
+	pajarorayo_ammo += pajarorayo_base_ammo + aditional_attacks
+	pajarorayoAtaqueTimer.start()
+
+func _on_pajarorayo_ataque_timer_timeout() -> void:
+	if pajarorayo_ammo > 0:
+		var pajaro_attack = pajarorayo.instantiate()
+		var target_enemy = get_nearby_enemy()
+		if target_enemy:  # Asegúrate de que hay un enemigo para atacar
+			# Posiciona el pájaro cerca del enemigo
+			pajaro_attack.position = target_enemy.position + Vector2(randf_range(-50, 50), randf_range(-50, 50))
+			pajaro_attack.target = target_enemy.global_position  # Establece el objetivo al enemigo
+			add_child(pajaro_attack)
+			
+			pajarorayo_ammo -= 1
+			if pajarorayo_ammo > 0:
+				pajarorayoAtaqueTimer.start()
+			else:
+				pajarorayoAtaqueTimer.stop()
+	
+func get_enemy_above_position():
+	var closest_enemy = get_random_target()  # Utiliza tu función existente para obtener un enemigo aleatorio
+	
+	if closest_enemy:  # Asegúrate de que hay un enemigo para atacar
+		return closest_enemy.global_position + Vector2(0, -50)  # Ajusta el valor para determinar la altura
+	return Vector2.ZERO  # Valor predeterminado si no hay enemigos
+
+func get_nearby_enemy():
+	if enemy_close.size() > 0:
+		# Selecciona un enemigo aleatorio de la lista
+		var random_index = randi() % enemy_close.size()
+		return enemy_close[random_index]
+	return null  # Devuelve null si no hay enemigos cerca
 	
 func get_random_target():
 	var closest_enemy = null
@@ -290,6 +357,11 @@ func upgrade_character(upgrade):
 		"fuego1":
 			circulofuego_level = 1
 			circulofuego_ammo += 1
+		"rayo1":
+			pajarorayo_level = 1
+			pajarorayo_base_ammo += 1
+		"regeneracion1":
+			health_regeneration_rate += 0.5  # Ajusta la cantidad de regeneración
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":
