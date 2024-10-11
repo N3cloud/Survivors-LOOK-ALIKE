@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://di5ds5scnuc0o" path="res://Textures/GUI/EmptyItem.png" id="1_r7coe"]
 [ext_resource type="Script" path="res://Jugador/GUI/item_container.gd" id="2_fqrkd"]
-[ext_resource type="Texture2D" uid="uid://1f2ntlsanwn5" path="res://Textures/GUI/sprite (2).png" id="3_cvor2"]
+[ext_resource type="Texture2D" uid="uid://cds2lkm51f03w" path="res://Textures/GUI/sprite (15).png" id="3_4h83i"]
 
 [node name="ItemContainer" type="TextureRect"]
 texture_filter = 1
@@ -12,22 +12,21 @@ texture = ExtResource("1_r7coe")
 script = ExtResource("2_fqrkd")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
 layout_mode = 0
 offset_left = -1.0
 offset_top = -1.0
 offset_right = 27.0
 offset_bottom = 27.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_cvor2")
+texture = ExtResource("3_4h83i")
 expand_mode = 1
 
 [node name="ItemTexture" type="TextureRect" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 21.0
-offset_bottom = 19.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 16.0
 scale = Vector2(0.5, 0.5)
 expand_mode = 1

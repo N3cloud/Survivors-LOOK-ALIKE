@@ -1,14 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqgooidkhkf23"]
+[gd_scene load_steps=13 format=3 uid="uid://cqgooidkhkf23"]
 
 [ext_resource type="Script" path="res://Enemigo/enemigo.gd" id="1_juswk"]
 [ext_resource type="Texture2D" uid="uid://bv30xj23qhojg" path="res://Textures/Enemy/Bat-Run.png" id="2_y5b05"]
 [ext_resource type="PackedScene" uid="uid://d6vbdqp0g70d" path="res://Utilidades/hurt_box.tscn" id="3_61viv"]
 [ext_resource type="PackedScene" uid="uid://cb1vuqcjh3t5" path="res://Utilidades/hit_box.tscn" id="4_ptxvm"]
 [ext_resource type="AudioStream" uid="uid://cakx84w2cw0ii" path="res://Audio/SoundEffect/enemy_hit.ogg" id="5_3uyad"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lp36a"]
-radius = 5.0
-height = 18.0
+[ext_resource type="FontFile" uid="uid://t2p7r82007sp" path="res://Font/m6x11.ttf" id="6_iyoyc"]
 
 [sub_resource type="Animation" id="Animation_4myim"]
 length = 0.001
@@ -73,6 +70,10 @@ _data = {
 "walk": SubResource("Animation_5v5k2")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lp36a"]
+radius = 5.0
+height = 18.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh27w"]
 size = Vector2(19, 24)
 
@@ -93,14 +94,14 @@ position = Vector2(0, 3)
 texture = ExtResource("2_y5b05")
 hframes = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 2)
-shape = SubResource("CapsuleShape2D_lp36a")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_jr4rk")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("CapsuleShape2D_lp36a")
 
 [node name="HurtBox" parent="." instance=ExtResource("3_61viv")]
 collision_layer = 4
@@ -123,6 +124,13 @@ shape = SubResource("RectangleShape2D_4l5ba")
 position = Vector2(3, 3)
 stream = ExtResource("5_3uyad")
 volume_db = -20.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 42.0
+offset_bottom = -8.0
+theme_override_fonts/font = ExtResource("6_iyoyc")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

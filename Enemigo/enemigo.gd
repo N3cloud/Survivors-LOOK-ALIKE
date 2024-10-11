@@ -14,6 +14,7 @@ var knockback = Vector2.ZERO
 @onready var anim = $AnimationPlayer
 @onready var sound_hit = $sound_hit
 @onready var hitbox = $HitBox
+@onready var damage_label = $Label
 
 var death_anim = preload("res://Enemigo/enemigo_1_muerte.tscn")
 var exp = preload("res://Objetos/experiencia.tscn")
@@ -53,7 +54,22 @@ func _on_hurt_box_hurt(damage: Variant, angle: Variant, knockback_amount: Varian
 	hp -= damage 
 	print("Damage received: ", damage)
 	knockback = angle * knockback_amount
+	
+	
+
+	
 	if hp <= 0:
 		death()
 	else:
 		sound_hit.play()
+		# Mostrar daño
+		var damage_label = $Label  # Asegúrate de que esta ruta sea correcta
+		damage_label.text = str(damage)
+		damage_label.show()
+		damage_label.scale = Vector2(0.5, 0.5)  # Asegúrate de que el tamaño sea el correcto
+		damage_label.modulate = Color(1, 1, 1)  # Blanco
+		await get_tree().create_timer(0.5).timeout  # Espera un segundo
+		damage_label.hide()  # Oculta el texto después de mostrarlo
+		
+		
+		

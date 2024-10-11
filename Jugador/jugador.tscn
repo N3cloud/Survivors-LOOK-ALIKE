@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dwud7342c4hlo"]
+[gd_scene load_steps=41 format=3 uid="uid://dwud7342c4hlo"]
 
 [ext_resource type="Script" path="res://Jugador/jugador.gd" id="1_fnw1q"]
 [ext_resource type="Texture2D" uid="uid://dgln0evj0153m" path="res://Textures/Player/run/run_1.png" id="2_lsyar"]
@@ -24,14 +24,15 @@
 [ext_resource type="Texture2D" uid="uid://dspvbpf15nkq6" path="res://Textures/Player/idle/idle_10.png" id="21_0nayp"]
 [ext_resource type="Texture2D" uid="uid://cp000d7h473ge" path="res://Textures/Player/idle/idle_11.png" id="22_47gtl"]
 [ext_resource type="Texture2D" uid="uid://cli274rg3coto" path="res://Textures/Player/idle/idle_12.png" id="23_3kacm"]
-[ext_resource type="Texture2D" uid="uid://27b4vbyjrokk" path="res://Textures/GUI/sprite (1).png" id="25_qwayb"]
-[ext_resource type="Texture2D" uid="uid://dmconr56smsng" path="res://Textures/GUI/sprite (12).png" id="26_1nx5m"]
-[ext_resource type="Texture2D" uid="uid://b8qf7xe8gdw6y" path="res://Textures/GUI/0.png" id="27_dgxdn"]
+[ext_resource type="Texture2D" uid="uid://dtidcbnfivgr5" path="res://Textures/GUI/sprite (10).png" id="26_8cx26"]
 [ext_resource type="FontFile" uid="uid://t2p7r82007sp" path="res://Font/m6x11.ttf" id="27_rs7e0"]
 [ext_resource type="AudioStream" uid="uid://cghb28mv8hcmr" path="res://Audio/SoundEffect/levelup.ogg" id="27_ylonu"]
-[ext_resource type="Texture2D" uid="uid://bcoyxguym0qv5" path="res://Textures/GUI/1.png" id="28_r53cu"]
+[ext_resource type="Texture2D" uid="uid://c76ke5c6xqkwl" path="res://Textures/GUI/sprite (5).png" id="28_2bhat"]
+[ext_resource type="Texture2D" uid="uid://bwa53mak0hy87" path="res://Textures/GUI/sprite (13).png" id="28_mtxmx"]
+[ext_resource type="Texture2D" uid="uid://dicsdyugwrfnw" path="res://Textures/GUI/sprite (11).png" id="29_tv4vh"]
 [ext_resource type="AudioStream" uid="uid://cvrnaxuvnuntd" path="res://Audio/SoundEffect/Lose.ogg" id="30_7blyf"]
 [ext_resource type="AudioStream" uid="uid://cgv71dy0tutqy" path="res://Audio/SoundEffect/Victory.wav" id="31_3074p"]
+[ext_resource type="Texture2D" uid="uid://cdjs05rd245n1" path="res://Textures/GUI/11.png" id="31_yxhjk"]
 [ext_resource type="PackedScene" uid="uid://cr2qefm64geka" path="res://Utilidades/basic_button.tscn" id="32_hywoa"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_awq1q"]
@@ -124,7 +125,7 @@ size = Vector2(18, 38)
 radius = 324.025
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wtog"]
-radius = 63.0317
+radius = 33.0151
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qyob0"]
 radius = 12.083
@@ -240,16 +241,16 @@ offset_right = 57.0
 offset_bottom = 12.0
 scale = Vector2(3, 3)
 pivot_offset = Vector2(5, 0)
-texture_under = ExtResource("25_qwayb")
-texture_progress = ExtResource("26_1nx5m")
+texture_over = ExtResource("28_2bhat")
+texture_progress = ExtResource("26_8cx26")
 
 [node name="Label_Nivel" type="Label" parent="GUI/GUI/ExpProgressBar"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 25.6667
-offset_top = 2.33333
-offset_right = 80.6667
-offset_bottom = 16.3333
+offset_left = 56.0
+offset_top = 1.33333
+offset_right = 111.0
+offset_bottom = 15.3333
 scale = Vector2(0.2, 0.2)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("27_rs7e0")
@@ -267,14 +268,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = 30.0
-offset_right = 16.0
-offset_bottom = 35.0
+offset_left = -8.0
+offset_top = 28.0
+offset_right = 13.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_under = ExtResource("27_dgxdn")
-texture_progress = ExtResource("28_r53cu")
+scale = Vector2(0.75, 0.75)
+fill_mode = 3
+texture_under = ExtResource("28_mtxmx")
+texture_progress = ExtResource("29_tv4vh")
 
 [node name="LevelUp" type="Panel" parent="GUI/GUI"]
 unique_name_in_owner = true
@@ -292,6 +295,15 @@ offset_right = 100.0
 offset_bottom = 121.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/GUI/LevelUp"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.0
+offset_top = -8.5
+offset_right = 201.0
+offset_bottom = 254.5
+texture = ExtResource("31_yxhjk")
 
 [node name="label_levelUp" type="Label" parent="GUI/GUI/LevelUp"]
 layout_mode = 0
@@ -331,6 +343,15 @@ offset_right = 100.0
 offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="GUI/GUI/DeathPanel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.0
+offset_top = -5.0
+offset_right = 201.0
+offset_bottom = 258.0
+texture = ExtResource("31_yxhjk")
 
 [node name="label_result" type="Label" parent="GUI/GUI/DeathPanel"]
 unique_name_in_owner = true

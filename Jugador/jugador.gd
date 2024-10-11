@@ -39,6 +39,11 @@ var spell_cooldown = 0
 var spell_size = 0
 var aditional_attacks = 0
 
+var max_weapons = 5
+var max_items = 5
+var current_weapon_count = 0
+var current_item_count = 0
+
 #Flecha
 var flecha_ammo = 0
 var flecha_base_ammo = 0
@@ -61,6 +66,8 @@ var pajarorayo_base_ammo = 0
 var pajarorayo_level = 0
 var pajarorayo_attack_speed = 2
 
+var returning = false
+var return_speed = 200  
 
 #Enemigos related
 
@@ -91,7 +98,6 @@ signal player_death
 
 func _ready() -> void:
 	upgrade_character("flecha1")
-	upgrade_character("rayo1")
 	attack()
 	set_expbar(experience, calculated_experiencecap())
 	_on_hurt_box_hurt(0,0,0) 
@@ -217,10 +223,11 @@ func _on_pajarorayo_ataque_timer_timeout() -> void:
 	if pajarorayo_ammo > 0:
 		var pajaro_attack = pajarorayo.instantiate()
 		var target_enemy = get_nearby_enemy()
+		pajaro_attack.position = get_tree().get_first_node_in_group("jugador").global_position  
 		if target_enemy:  # Asegúrate de que hay un enemigo para atacar
 			# Posiciona el pájaro cerca del enemigo
-			pajaro_attack.position = target_enemy.position + Vector2(randf_range(-50, 50), randf_range(-50, 50))
 			pajaro_attack.target = target_enemy.global_position  # Establece el objetivo al enemigo
+			pajaro_attack.start_move_to_enemy()
 			add_child(pajaro_attack)
 			
 			pajarorayo_ammo -= 1
@@ -332,6 +339,8 @@ func levelup():
 func upgrade_character(upgrade):
 	match upgrade:
 		"flecha1":
+			if flecha_level == 0:  # Si es una nueva arma
+				current_weapon_count += 1
 			flecha_level = 1
 			flecha_base_ammo += 1
 		"flecha2":
@@ -343,6 +352,8 @@ func upgrade_character(upgrade):
 			flecha_level = 4
 			flecha_base_ammo += 2
 		"dark1":
+			if arma2_level == 0:  # Si es una nueva arma
+				current_weapon_count += 1
 			arma2_level = 1
 			arma2_base_ammo += 1
 		"dark2":
@@ -355,22 +366,38 @@ func upgrade_character(upgrade):
 			arma2_level = 4
 			arma2_base_ammo += 1
 		"fuego1":
+			if circulofuego_level == 0:  # Si es una nueva arma
+				current_weapon_count += 1
 			circulofuego_level = 1
 			circulofuego_ammo += 1
 		"rayo1":
+			if pajarorayo_level == 0:  # Si es una nueva arma
+				current_weapon_count += 1
 			pajarorayo_level = 1
 			pajarorayo_base_ammo += 1
 		"regeneracion1":
+			if health_regeneration_rate == 0:  # Si es un nuevo ítem
+				current_item_count += 1
 			health_regeneration_rate += 0.5  # Ajusta la cantidad de regeneración
 		"armor1","armor2","armor3","armor4":
+			if armor == 0:  # Si es un nuevo ítem
+				current_item_count += 1
 			armor += 1
 		"speed1","speed2","speed3","speed4":
+			if movement_speed == speed:  # Considera como nuevo ítem si es la base
+				current_item_count += 1
 			movement_speed += 20.0
 		"tome1","tome2","tome3","tome4":
+			if spell_size == 0:  # Considera como nuevo ítem si es la base
+				current_item_count += 1
 			spell_size += 0.10
 		"scroll1","scroll2","scroll3","scroll4":
+			if spell_cooldown == 0:  # Considera como nuevo ítem si es la base
+				current_item_count += 1
 			spell_cooldown += 0.05
 		"ring1","ring2":
+			if aditional_attacks == 0:  # Considera como nuevo ítem si es la base
+				current_item_count += 1
 			aditional_attacks += 1
 		"comida":
 			hp += 20
@@ -395,8 +422,10 @@ func get_random_item():
 			pass
 		elif i in upgrade_options:
 			pass
-		elif UpgradeDb.UPGRADES[i]["type"] == "item":
+		elif UpgradeDb.UPGRADES[i]["type"] == "item" and current_item_count >= max_items:
 			pass
+		elif UpgradeDb.UPGRADES[i]["type"] == "weapon" and current_weapon_count >= max_weapons:
+			pass  # Ya tiene el número máximo de armas
 		elif UpgradeDb.UPGRADES[i]["prerequisite"].size() > 0:
 			var to_add = true
 			for n in UpgradeDb.UPGRADES[i]["prerequisite"]:
