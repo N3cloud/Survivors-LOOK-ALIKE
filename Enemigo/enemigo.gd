@@ -61,8 +61,7 @@ func _on_hurt_box_hurt(damage: Variant, angle: Variant, knockback_amount: Varian
 	if hp <= 0:
 		death()
 	else:
-		sound_hit.play()
-		# Mostrar daño
+		sound_hit.play()		# Mostrar daño
 		var damage_label = $Label  # Asegúrate de que esta ruta sea correcta
 		damage_label.text = str(damage)
 		damage_label.show()

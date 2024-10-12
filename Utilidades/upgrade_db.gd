@@ -69,27 +69,107 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"fuego1": {
-		"icon": ALL_PATH + "spellbook_03e.png",
+		"icon": ALL_PATH + "book_03d.png",
 		"displayname": "Circulo solar",
 		"details": "Un circulo de fuego orbita alrededor del jugador",
 		"level": "Nivel: 1",
 		"prerequisite": [],
 		"type": "weapon"
 	},
+	"fuego2": {
+		"icon": ALL_PATH + "book_03d.png",
+		"displayname": "Circulo solar",
+		"details": "Aumenta el knockback en 10%, +1 de daño y +1 adicional",
+		"level": "Nivel: 2",
+		"prerequisite": ["fuego1"],
+		"type": "weapon"
+	},
+	"fuego3": {
+		"icon": ALL_PATH + "book_03d.png",
+		"displayname": "Circulo solar",
+		"details": "Aumenta el knockback en 10%, +1 de daño y +1 adicional",
+		"level": "Nivel: 3",
+		"prerequisite": ["fuego2"],
+		"type": "weapon"
+	},
+	"fuego4": {
+		"icon": ALL_PATH + "book_03d.png",
+		"displayname": "Circulo solar",
+		"details": "Aumenta el knockback en 10%, +1 de daño,+1 adicional y rotan mas rápido",
+		"level": "Nivel: 4",
+		"prerequisite": ["fuego3"],
+		"type": "weapon"
+	},
 	"rayo1": {
-		"icon": ALL_PATH + "spellbook_03e.png",
+		"icon": ALL_PATH + "spellbook_03b.png",
 		"displayname": "Alas de trueno",
 		"details": "Un ave ataca a un enemigo aleatorio",
 		"level": "Nivel: 1",
 		"prerequisite": [],
 		"type": "weapon"
 	},
+	"rayo2": {
+		"icon": ALL_PATH + "spellbook_03b.png",
+		"displayname": "Alas de trueno",
+		"details": "Atraviesa un enemigo más y 1+ proyectil",
+		"level": "Nivel: 2",
+		"prerequisite": ["rayo1"],
+		"type": "weapon"
+	},
+	"rayo3": {
+		"icon": ALL_PATH + "spellbook_03b.png",
+		"displayname": "Alas de trueno",
+		"details": "+5 de daño, pasa sobre un enemigo más y +1 proyectil",
+		"level": "Nivel: 3",
+		"prerequisite": ["rayo2"],
+		"type": "weapon"
+	},
+	"rayo4": {
+		"icon": ALL_PATH + "spellbook_03b.png",
+		"displayname": "Alas de trueno",
+		"details": "50% de velocidad, +5 de daño, +1 proyectil",
+		"level": "Nivel: 4",
+		"prerequisite": ["rayo3"],
+		"type": "weapon"
+	},
 	"regeneracion1": {
-		"icon": ALL_PATH + "spellbook_03e.png",
+		"icon": ALL_PATH + "spellbook_01e.png",
 		"displayname": "Regeneración",
 		"details": "Regenera 0.1 de vida por segundo",
 		"level": "Nivel: 1",
 		"prerequisite": [],
+		"type": "item"
+	},
+	"regeneracion2": {
+		"icon": ALL_PATH + "spellbook_01e.png",
+		"displayname": "Regeneración",
+		"details": "Regenera 0.2 de vida por segundo",
+		"level": "Nivel: 2",
+		"prerequisite": ["regeneracion1"],
+		"type": "item"
+	},
+	"regeneracion3": {
+		"icon": ALL_PATH + "spellbook_01e.png",
+		"displayname": "Regeneración",
+		"details": "Regenera 0.3 de vida por segundo",
+		"level": "Nivel: 3",
+		"prerequisite": ["regeneracion2"],
+		"type": "item"
+	},
+	"regeneracion4": {
+		"icon": ALL_PATH + "spellbook_01e.png",
+		"displayname": "Regeneración",
+		"details": "Regenera 0.4 de vida por segundo",
+		"level": "Nivel: 4",
+		"prerequisite": ["regeneracion3"],
+		"type": "item"
+	},
+	"regeneracion5": {
+		"icon": ALL_PATH + "spellbook_01e.png",
+		"displayname": "Regeneración",
+		"details": "Regenera 0.5 de vida por segundo",
+		"level": "Nivel: 5",
+		"prerequisite": ["regeneracion4"],
 		"type": "item"
 	},
 	"armor1": {

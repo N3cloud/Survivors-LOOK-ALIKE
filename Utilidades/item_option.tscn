@@ -1,46 +1,59 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3gp1cil211gi"]
+[gd_scene load_steps=6 format=3 uid="uid://c3gp1cil211gi"]
 
 [ext_resource type="Script" path="res://Utilidades/item_option.gd" id="1_aix42"]
 [ext_resource type="Texture2D" uid="uid://bf83kgkks7qfm" path="res://Textures/Items/Weapons/sword.png" id="1_y8qtd"]
+[ext_resource type="Texture2D" uid="uid://cej16mlveedie" path="res://Textures/GUI/sprite (11).png" id="2_nqxj4"]
+[ext_resource type="Texture2D" uid="uid://calvrfyil3hli" path="res://Textures/GUI/sprite (9).png" id="3_8sql7"]
 [ext_resource type="FontFile" uid="uid://t2p7r82007sp" path="res://Font/m6x11.ttf" id="3_n6cq6"]
 
 [node name="ItemOption" type="ColorRect" groups=["jugador"]]
-custom_minimum_size = Vector2(180, 50)
+custom_minimum_size = Vector2(180, 70)
 offset_right = 40.0
 offset_bottom = 40.0
-color = Color(0.692827, 0.502763, 0.277332, 1)
+color = Color(1, 1, 1, 0)
 script = ExtResource("1_aix42")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = -4.0
-offset_right = 182.0
-offset_bottom = 50.0
+offset_right = 211.0
+offset_bottom = 70.0
+texture = ExtResource("2_nqxj4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 26.0
-offset_bottom = 26.0
-color = Color(0, 0, 0, 1)
+offset_left = 18.0
+offset_top = 14.0
+offset_right = 42.0
+offset_bottom = 38.0
+color = Color(1, 1, 1, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_top = 3.0
+offset_right = 38.0
+offset_bottom = 40.0
+texture = ExtResource("3_8sql7")
 
 [node name="ItemIcon" type="TextureRect" parent="ColorRect"]
 texture_filter = 1
 layout_mode = 0
-offset_right = 32.0
-offset_bottom = 32.0
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 38.0
+offset_bottom = 40.0
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_y8qtd")
 
 [node name="label_nombre" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 29.0
-offset_top = -2.0
-offset_right = 71.0
-offset_bottom = 21.0
+offset_left = 57.0
+offset_top = 10.0
+offset_right = 99.0
+offset_bottom = 33.0
 theme_override_fonts/font = ExtResource("3_n6cq6")
 theme_override_font_sizes/font_size = 14
 text = "nombre"
@@ -50,10 +63,10 @@ vertical_alignment = 1
 [node name="label_descripcion" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 4.0
-offset_top = 27.0
-offset_right = 166.0
-offset_bottom = 48.0
+offset_left = 59.0
+offset_top = 35.0
+offset_right = 193.0
+offset_bottom = 56.0
 theme_override_fonts/font = ExtResource("3_n6cq6")
 theme_override_font_sizes/font_size = 8
 text = "descripcion del item"
@@ -62,10 +75,10 @@ autowrap_mode = 3
 [node name="label_nivel" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 130.0
-offset_top = 3.0
-offset_right = 181.0
-offset_bottom = 26.0
+offset_left = 149.0
+offset_top = 13.0
+offset_right = 200.0
+offset_bottom = 36.0
 theme_override_fonts/font = ExtResource("3_n6cq6")
 theme_override_font_sizes/font_size = 12
 text = "nivel 1"
@@ -73,8 +86,10 @@ text = "nivel 1"
 [node name="TextureButton" type="TextureButton" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 180.0
-offset_bottom = 50.0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 196.0
+offset_bottom = 62.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

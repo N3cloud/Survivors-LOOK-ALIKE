@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var movement_speed = 45.0
+var movement_speed = 50.0
 var hp = 80
 var maxhp = 80
 var last_movement = Vector2.UP
@@ -323,7 +323,7 @@ func levelup():
 	sound_levelUp.play()
 	label_level.text = str("Nivel: ",experience_level)
 	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel,"position", Vector2(250,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(levelPanel,"position", Vector2(235,43),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
 	var options = 0
@@ -370,12 +370,30 @@ func upgrade_character(upgrade):
 				current_weapon_count += 1
 			circulofuego_level = 1
 			circulofuego_ammo += 1
+		"fuego2":
+			circulofuego_level = 2
+			circulofuego_ammo += 2
+		"fuego3":
+			circulofuego_level = 3
+			circulofuego_ammo += 3
+		"fuego4":
+			circulofuego_level = 4
+			circulofuego_ammo += 4
 		"rayo1":
 			if pajarorayo_level == 0:  # Si es una nueva arma
 				current_weapon_count += 1
 			pajarorayo_level = 1
 			pajarorayo_base_ammo += 1
-		"regeneracion1":
+		"rayo2":
+			pajarorayo_level = 2
+			pajarorayo_base_ammo += 2
+		"rayo3":
+			pajarorayo_level = 3
+			pajarorayo_base_ammo += 3
+		"rayo4":
+			pajarorayo_level = 4
+			pajarorayo_base_ammo += 4
+		"regeneracion1","regeneracion2","regeneracion3","regeneracion4","regeneracion5":
 			if health_regeneration_rate == 0:  # Si es un nuevo ítem
 				current_item_count += 1
 			health_regeneration_rate += 0.5  # Ajusta la cantidad de regeneración

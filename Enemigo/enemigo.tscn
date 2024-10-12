@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cqgooidkhkf23"]
+[gd_scene load_steps=15 format=3 uid="uid://cqgooidkhkf23"]
 
 [ext_resource type="Script" path="res://Enemigo/enemigo.gd" id="1_juswk"]
 [ext_resource type="Texture2D" uid="uid://bv30xj23qhojg" path="res://Textures/Enemy/Bat-Run.png" id="2_y5b05"]
 [ext_resource type="PackedScene" uid="uid://d6vbdqp0g70d" path="res://Utilidades/hurt_box.tscn" id="3_61viv"]
+[ext_resource type="Texture2D" uid="uid://cl4vhe6ktdewc" path="res://Textures/Enemy/Bat-Hurt.png" id="3_hio82"]
 [ext_resource type="PackedScene" uid="uid://cb1vuqcjh3t5" path="res://Utilidades/hit_box.tscn" id="4_ptxvm"]
 [ext_resource type="AudioStream" uid="uid://cakx84w2cw0ii" path="res://Audio/SoundEffect/enemy_hit.ogg" id="5_3uyad"]
 [ext_resource type="FontFile" uid="uid://t2p7r82007sp" path="res://Font/m6x11.ttf" id="6_iyoyc"]
@@ -32,6 +33,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(),
 "update": 1,
 "values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_5v5k2"]
@@ -64,9 +77,27 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
+[sub_resource type="Animation" id="Animation_muun6"]
+resource_name = "hit"
+length = 0.5
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jr4rk"]
 _data = {
 "RESET": SubResource("Animation_4myim"),
+"hit": SubResource("Animation_muun6"),
 "walk": SubResource("Animation_5v5k2")
 }
 
@@ -86,6 +117,7 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_juswk")
 movement_speed = 40.0
+hp = 5
 enemy_damage = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -93,6 +125,11 @@ texture_filter = 1
 position = Vector2(0, 3)
 texture = ExtResource("2_y5b05")
 hframes = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+visible = false
+texture = ExtResource("3_hio82")
+hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

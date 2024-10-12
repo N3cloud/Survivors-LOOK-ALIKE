@@ -34,19 +34,19 @@ func update_circulofuego():
 			rotation_speed = 2.0  # Velocidad de rotación
 		2:
 			hp = 9999
-			damage = 0
+			damage = 2
 			knockback_amount = 60
 			attack_size = 1.0 * (1 + player.spell_size)
 			rotation_speed = 2.0  # Velocidad de rotación
 		3:
 			hp = 9999
-			damage = 1
+			damage = 3
 			knockback_amount = 70
 			attack_size = 1.0 * (1 + player.spell_size)
 			rotation_speed = 2.0  # Velocidad de rotación
 		4:
 			hp = 9999
-			damage = 1
+			damage = 5
 			knockback_amount = 80
 			attack_size = 1.0 * (1 + player.spell_size)
 			rotation_speed = 3.0  # Velocidad de rotación

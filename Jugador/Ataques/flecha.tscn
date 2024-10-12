@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://tncx4ccb1mdq"]
 
 [ext_resource type="Script" path="res://Jugador/Ataques/flecha.gd" id="1_ne2t0"]
-[ext_resource type="Texture2D" uid="uid://bu3o52jnef5kr" path="res://Textures/Items/Weapons/flecha.png" id="2_agaw4"]
+[ext_resource type="Texture2D" uid="uid://os30ak6nmudu" path="res://Textures/Items/Weapons/arrow/arrow_.png" id="2_vr30x"]
 [ext_resource type="AudioStream" uid="uid://cplt6b8e2ldkf" path="res://Audio/SoundEffect/ice.wav" id="3_x7cuu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2cp6"]
@@ -19,9 +19,7 @@ shape = SubResource("RectangleShape2D_q2cp6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_agaw4")
-hframes = 18
-vframes = 9
+texture = ExtResource("2_vr30x")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
