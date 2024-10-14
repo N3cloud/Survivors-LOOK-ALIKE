@@ -15,6 +15,12 @@ var knockback = Vector2.ZERO
 @onready var sound_hit = $sound_hit
 @onready var hitbox = $HitBox
 @onready var damage_label = $Label
+@onready var hideTimer = $HideTimer
+@onready var collision = $CollisionShape2D
+
+
+#Optimizacion
+var screen_size 
 
 var death_anim = preload("res://Enemigo/enemigo_1_muerte.tscn")
 var exp = preload("res://Objetos/experiencia.tscn")
@@ -24,6 +30,8 @@ signal remove_from_array(object)
 func _ready() -> void:
 	anim.play("walk")
 	hitbox.damage = enemy_damage
+	screen_size =  get_viewport_rect().size
+	hideTimer.connect("timeout",Callable(self,"_on_hide_timer_timeout"))
 
 func _physics_process(_delta: float) -> void:
 	knockback = knockback.move_toward(	Vector2.ZERO, knockback_recovery)
@@ -69,6 +77,20 @@ func _on_hurt_box_hurt(damage: Variant, angle: Variant, knockback_amount: Varian
 		damage_label.modulate = Color(1, 1, 1)  # Blanco
 		await get_tree().create_timer(0.5).timeout  # Espera un segundo
 		damage_label.hide()  # Oculta el texto después de mostrarlo
-		
-		
-		
+
+func frame_save(amount = 20):
+	var rand_disable = randi() % 100
+	if rand_disable < amount:
+		collision.call_deferred("set","disabled",true)
+		anim.stop()
+
+func _on_hide_timer_timeout() -> void:
+	var location_dif  = global_position - player.global_position
+	if abs(location_dif.x) > (screen_size.x/2) * 1.4 || abs(location_dif.y) > (screen_size.y/2) * 1.4:
+		visible = false
+		anim.stop()  # Detener animaciones
+		collision.disabled = true  # Desactivar colisiones
+	else:
+		visible = true
+		anim.play("walk")  # Reanudar animaciones
+		collision.disabled = false  # Activar colisiones
