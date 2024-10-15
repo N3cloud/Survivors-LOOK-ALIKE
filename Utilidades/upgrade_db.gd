@@ -132,6 +132,22 @@ const UPGRADES = {
 		"prerequisite": ["rayo3"],
 		"type": "weapon"
 	},
+	"viento1": {
+		"icon": ALL_PATH + "spellbook_03b.png",
+		"displayname": "Latigo de viento",
+		"details": "Un ataque de viento se genera horizontalmente",
+		"level": "Nivel: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"viento2": {
+		"icon": ALL_PATH + "spellbook_03b.png",
+		"displayname": "Latigo de viento",
+		"details": "Un ataque de viento adicional se genera horizontalmente",
+		"level": "Nivel: 2",
+		"prerequisite": ["viento1"],
+		"type": "weapon"
+	},
 	"regeneracion1": {
 		"icon": ALL_PATH + "spellbook_01e.png",
 		"displayname": "Regeneración",

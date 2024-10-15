@@ -200,6 +200,14 @@ wait_time = 5.0
 unique_name_in_owner = true
 wait_time = 0.2
 
+[node name="latigovientoTimer" type="Timer" parent="Ataques"]
+unique_name_in_owner = true
+wait_time = 2.0
+
+[node name="latigovientoAttackTimer" type="Timer" parent="Ataques/latigovientoTimer"]
+unique_name_in_owner = true
+wait_time = 0.2
+
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 4
@@ -409,6 +417,8 @@ columns = 10
 [connection signal="timeout" from="Ataques/arma2Timer/armar2AtaqueTimer" to="." method="_on_armar_2_ataque_timer_timeout"]
 [connection signal="timeout" from="Ataques/pajarorayoTimer" to="." method="_on_pajarorayo_timer_timeout"]
 [connection signal="timeout" from="Ataques/pajarorayoTimer/pajarorayoAtaqueTimer" to="." method="_on_pajarorayo_ataque_timer_timeout"]
+[connection signal="timeout" from="Ataques/latigovientoTimer" to="." method="_on_latigoviento_timer_timeout"]
+[connection signal="timeout" from="Ataques/latigovientoTimer/latigovientoAttackTimer" to="." method="_on_latigoviento_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]

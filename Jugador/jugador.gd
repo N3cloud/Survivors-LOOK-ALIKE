@@ -19,6 +19,7 @@ var flecha = preload("res://Jugador/Ataques/flecha.tscn")
 var arma2 = preload("res://Jugador/Ataques/arma_2.tscn")
 var circulofuego = preload("res://Jugador/Ataques/circulo_de_fuego.tscn")
 var pajarorayo = preload("res://Jugador/Ataques/pajarorayo.tscn")
+var latigoviento = preload("res://Jugador/Ataques/latigo_de_viento.tscn")
 
 #Ataque Nodos
 @onready var flechaTimer = get_node("%flechaTimer")
@@ -28,6 +29,8 @@ var pajarorayo = preload("res://Jugador/Ataques/pajarorayo.tscn")
 @onready var circuloFuegoBase = get_node("%circuloFuegoBase")
 @onready var pajarorayoTimer = get_node("%pajarorayoTimer")
 @onready var pajarorayoAtaqueTimer = get_node("%pajarorayoAtaqueTimer")
+@onready var latigovientoTimer = get_node("%latigovientoTimer")
+@onready var latigovientoAtaqueTimer = get_node("%latigovientoAttackTimer")
 
 
 #UPGRADES
@@ -64,10 +67,16 @@ var circulofuego_level = 0
 var pajarorayo_ammo = 0
 var pajarorayo_base_ammo = 0
 var pajarorayo_level = 0
-var pajarorayo_attack_speed = 2
+var pajarorayo_attack_speed = 5
 
 var returning = false
 var return_speed = 200  
+
+#Latigo de viento
+var latigoviento_ammo = 0
+var latigoviento_base_ammo = 0
+var latigoviento_level = 0
+var latigoviento_attack_speed = 2
 
 #Enemigos related
 
@@ -154,7 +163,11 @@ func attack():
 		pajarorayoTimer.wait_time = pajarorayo_attack_speed * (1-spell_cooldown)
 		if pajarorayoTimer.is_stopped():
 			pajarorayoTimer.start()
-			
+	if latigoviento_level > 0:
+		latigovientoTimer.wait_time = latigoviento_attack_speed * (1-spell_cooldown)
+		if latigovientoTimer.is_stopped():
+			latigovientoTimer.start()
+				
 func _on_hurt_box_hurt(damage: Variant, _angle, _knockback) -> void:
 	hp -= clamp(damage - armor, 1.0,999.0) 
 	healthBar.max_value = maxhp
@@ -235,6 +248,32 @@ func _on_pajarorayo_ataque_timer_timeout() -> void:
 				pajarorayoAtaqueTimer.start()
 			else:
 				pajarorayoAtaqueTimer.stop()
+				
+func _on_latigoviento_timer_timeout() -> void:
+	latigoviento_ammo += latigoviento_base_ammo 
+	latigovientoAtaqueTimer.start()
+
+
+func _on_latigoviento_attack_timer_timeout() -> void:
+	if latigoviento_ammo > 0:
+		var latigo_attack = latigoviento.instantiate()
+		latigo_attack.direction = Vector2.RIGHT  # Primer nivel ataca hacia la derecha
+		latigo_attack.global_position = get_tree().get_first_node_in_group("jugador").global_position 
+		add_child(latigo_attack)
+		
+		# Si hay ataques adicionales, añadir ataque hacia la izquierda
+		if latigoviento_level == 2:
+			var latigo_attack_left = latigoviento.instantiate()
+			latigo_attack_left.direction = Vector2.LEFT  # Ataque adicional hacia la izquierda
+			latigo_attack_left.global_position = get_tree().get_first_node_in_group("jugador").global_position 
+			add_child(latigo_attack_left)
+			
+		
+		latigoviento_ammo -= 1
+		if latigoviento_ammo > 0:
+			latigovientoAtaqueTimer.start()
+		else:
+			latigovientoAtaqueTimer.stop()
 	
 func get_enemy_above_position():
 	var closest_enemy = get_random_target()  # Utiliza tu función existente para obtener un enemigo aleatorio
@@ -322,9 +361,21 @@ func set_expbar(set_value = 1, set_max_value = 100):
 func levelup():
 	sound_levelUp.play()
 	label_level.text = str("Nivel: ",experience_level)
+	# Obtener el tamaño de la pantalla y del levelPanel
+	var screen_size = get_viewport_rect().size
+	var panel_size = levelPanel.get_rect().size  
+
+	# Calcular la posición centrada
+	var centered_position = Vector2(
+		(screen_size.x - panel_size.x) / 2,  # Centrar horizontalmente
+		(screen_size.y - panel_size.y) / 2   # Centrar verticalmente
+	)
+
+	# Crear el tween para mover el levelPanel al centro
 	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel,"position", Vector2(235,43),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(levelPanel, "position", centered_position, 0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
+	
 	levelPanel.visible = true
 	var options = 0
 	var options_max = 3
@@ -393,6 +444,14 @@ func upgrade_character(upgrade):
 		"rayo4":
 			pajarorayo_level = 4
 			pajarorayo_base_ammo += 4
+		"viento1":
+			if latigoviento_level == 0:  # Si es una nueva arma
+				current_weapon_count += 1
+			latigoviento_level = 1
+			latigoviento_base_ammo += 1
+		"viento2":
+			latigoviento_level = 2
+			latigoviento_base_ammo += 1
 		"regeneracion1","regeneracion2","regeneracion3","regeneracion4","regeneracion5":
 			if health_regeneration_rate == 0:  # Si es un nuevo ítem
 				current_item_count += 1
@@ -481,9 +540,21 @@ func death():
 	death_panel.visible = true
 	emit_signal("player_death")
 	get_tree().paused = true
+	
+	# Obtener el tamaño de la pantalla y del death_panel
+	var screen_size = get_viewport_rect().size
+	var panel_size = death_panel.get_rect().size  # Obtener el tamaño del death_panel
+
+	# Calcular la posición centrada
+	var centered_position = Vector2(
+		(screen_size.x - panel_size.x) / 2,  # Centrar horizontalmente
+		(screen_size.y - panel_size.y) / 2   # Centrar verticalmente
+	)
+	# Crear el tween para mover el death_panel al centro
 	var tween = death_panel.create_tween()
-	tween.tween_property(death_panel,"position",Vector2(250,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(death_panel, "position", centered_position, 3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
+	
 	if hp <= 0:
 		label_result.text = "GAME OVER"
 		sound_death.play()

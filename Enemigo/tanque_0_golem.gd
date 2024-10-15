@@ -16,7 +16,7 @@ var knockback = Vector2.ZERO
 @onready var hitbox = $HitBox
 @onready var damage_label = $Label
 
-var death_anim = preload("res://Enemigo/tanque0golem_muerte.gd")
+var death_anim = preload("res://Enemigo/tanque0golem_muerte.tscn")
 var exp = preload("res://Objetos/experiencia.tscn")
 
 signal remove_from_array(object)

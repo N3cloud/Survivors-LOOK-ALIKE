@@ -5,7 +5,7 @@ extends Node2D
 @onready var player = get_tree().get_first_node_in_group("jugador")
 
 var time = 0
-var enemy_cap = 500
+var enemy_cap = 300
 var enemies_to_spawn = []
 
 func _on_timer_timeout() -> void:
@@ -28,6 +28,7 @@ func _on_timer_timeout() -> void:
 					else:
 						enemies_to_spawn.append(new_enemy)
 					counter += 1
+					
 	if my_children.size() <= enemy_cap and enemies_to_spawn.size() > 0:
 		var spawn_number = clamp(enemies_to_spawn.size(),1,50) - 1
 		var counter = 0

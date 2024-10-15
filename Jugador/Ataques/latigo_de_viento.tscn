@@ -1,0 +1,74 @@
+[gd_scene load_steps=14 format=3 uid="uid://d2q8bjdr8jcrb"]
+
+[ext_resource type="Script" path="res://Jugador/Ataques/latigo_de_viento.gd" id="1_po64v"]
+[ext_resource type="Texture2D" uid="uid://dk3oo2ymlj5r6" path="res://Textures/Items/Weapons/Latigo de viento/sprite (0).png" id="2_c5b2c"]
+[ext_resource type="Texture2D" uid="uid://bo8y2xem2vwb6" path="res://Textures/Items/Weapons/Latigo de viento/sprite (1).png" id="3_jmnas"]
+[ext_resource type="Texture2D" uid="uid://bw1p61roxp4wl" path="res://Textures/Items/Weapons/Latigo de viento/sprite (2).png" id="4_28dak"]
+[ext_resource type="Texture2D" uid="uid://w1g8u3x2pq3n" path="res://Textures/Items/Weapons/Latigo de viento/sprite (3).png" id="5_82mot"]
+[ext_resource type="Texture2D" uid="uid://crkpg1wsq6evf" path="res://Textures/Items/Weapons/Latigo de viento/sprite (4).png" id="6_3t2jm"]
+[ext_resource type="Texture2D" uid="uid://bscbv2ysdgb6t" path="res://Textures/Items/Weapons/Latigo de viento/sprite (5).png" id="7_5tyai"]
+[ext_resource type="Texture2D" uid="uid://chekyruqt8d4" path="res://Textures/Items/Weapons/Latigo de viento/sprite (6).png" id="8_in1os"]
+[ext_resource type="Texture2D" uid="uid://d2dxff4cqb50f" path="res://Textures/Items/Weapons/Latigo de viento/sprite (7).png" id="9_wbgpm"]
+[ext_resource type="Texture2D" uid="uid://sq8gj1e1y01j" path="res://Textures/Items/Weapons/Latigo de viento/sprite (8).png" id="10_ud86i"]
+[ext_resource type="Texture2D" uid="uid://beawkpleh2bmx" path="res://Textures/Items/Weapons/Latigo de viento/sprite (9).png" id="11_i502y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2kibh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_c5b2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jmnas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_28dak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_82mot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3t2jm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5tyai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_in1os")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wbgpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ud86i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_i502y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7d28l"]
+radius = 16.0
+
+[node name="Latigo de viento" type="Area2D" groups=["attack"]]
+top_level = true
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_po64v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_2kibh")
+frame_progress = 0.372755
+speed_scale = 2.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 3)
+shape = SubResource("CircleShape2D_7d28l")
+
+[node name="Timer" type="Timer" parent="."]
