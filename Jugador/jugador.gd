@@ -6,6 +6,8 @@ var hp = 80
 var maxhp = 80
 var last_movement = Vector2.UP
 
+var gold = 0
+var gold_amount = 0
 var experience = 0
 var experience_level = 1
 var collected_experience = 0
@@ -110,6 +112,8 @@ func _ready() -> void:
 	attack()
 	set_expbar(experience, calculated_experiencecap())
 	_on_hurt_box_hurt(0,0,0) 
+	load_gold()
+	print("Oro cargado: ", gold_amount)
 
 func _physics_process(delta: float) -> void:
 	movement()
@@ -325,9 +329,33 @@ func _on_grab_area_area_entered(area: Area2D) -> void:
 
 func _on_collect_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
-		var exp = area.collect()
-		calculate_experience(exp)
+		if area.has_method("collect"):
+			if area.is_in_group("gold"):
+				var gold = area.collect()  # Recolectar oro
+				calculate_gold(gold)
+			elif area.is_in_group("experience"):
+				var exp = area.collect()  # Recolectar experiencia
+				calculate_experience(exp)
+
 		
+func calculate_gold(gold):
+	gold_amount += gold  # Incrementamos el oro del jugador
+	save_gold()  # Guardamos el oro localmente
+	print("Oro recogido: ", gold, " - Total de oro: ", gold_amount)
+
+func save_gold():
+	var file = FileAccess.open("user://gold_save.dat", FileAccess.WRITE)  # Abrir el archivo para escribir
+	file.store_var(gold_amount)  # Guardar la cantidad de oro
+	file.close()
+
+func load_gold():
+	var file = FileAccess.open("user://gold_save.dat", FileAccess.READ)  # Abrir el archivo para leer
+	if file:
+		gold_amount = file.get_var()  # Cargar la cantidad de oro
+		file.close()
+	else:
+		gold_amount = 0  # Si no existe el archivo, inicializa con 0 oro
+
 func calculate_experience(exp):
 	var exp_required= calculated_experiencecap()
 	collected_experience += exp

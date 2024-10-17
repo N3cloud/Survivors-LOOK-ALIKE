@@ -15,6 +15,7 @@ var MAX_SPEED = 30.0
 @onready var sound = $sonido_exp
 
 func _ready() -> void:
+	self.add_to_group("experience")
 	if experience < 5:
 		return
 	elif experience < 25:

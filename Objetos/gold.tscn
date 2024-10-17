@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmjgvft3jpyu6"]
+
+[ext_resource type="Script" path="res://Objetos/gold.gd" id="1_okple"]
+[ext_resource type="Texture2D" uid="uid://cdvbtxdsp4256" path="res://Textures/Items/Gems/sprite (4).png" id="1_pp784"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s5hll"]
+radius = 14.0
+
+[node name="Gold" type="Area2D" groups=["loot"]]
+scale = Vector2(0.7, 0.7)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_okple")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_pp784")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s5hll")

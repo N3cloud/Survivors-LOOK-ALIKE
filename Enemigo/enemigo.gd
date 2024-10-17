@@ -24,6 +24,7 @@ var screen_size
 
 var death_anim = preload("res://Enemigo/enemigo_1_muerte.tscn")
 var exp = preload("res://Objetos/experiencia.tscn")
+var gold = preload("res://Objetos/gold.tscn")
 
 signal remove_from_array(object)
 
@@ -48,15 +49,29 @@ func _physics_process(_delta: float) -> void:
 
 func death():
 	emit_signal("remove_from_array", self)
+	# Animación de muerte
 	var enemy_death = death_anim.instantiate()
 	enemy_death.scale = sprite.scale 
 	enemy_death.global_position =  global_position
 	get_parent().call_deferred("add_child", enemy_death)
+	
+	# Drop de experiencia
 	var new_exp = exp.instantiate()
 	new_exp.global_position = global_position
 	new_exp.experience = experience
 	loot_base.call_deferred("add_child", new_exp)
+	
+	# Probabilidad de 10% de dropear oro
+	var drop_chance = randi() % 100  # Número aleatorio entre 0 y 99
+	if drop_chance < 10:  # Si el número es menor que 10 (10% de probabilidad)
+		drop_gold()
+		
 	queue_free()
+
+func drop_gold():
+	var gold_instance = gold.instantiate()  # Instanciar la escena del oro
+	gold_instance.global_position = global_position  # Posición del oro donde muere el enemigo
+	loot_base.call_deferred("add_child", gold_instance)  # Agregar el oro a la escena	
 
 func _on_hurt_box_hurt(damage: Variant, angle: Variant, knockback_amount: Variant ) -> void:
 	hp -= damage 

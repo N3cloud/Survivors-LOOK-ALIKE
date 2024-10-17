@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dfu0tt8vmbq7h" path="res://Textures/Items/Gems/sprite (3).png" id="2_mo75t"]
 [ext_resource type="AudioStream" uid="uid://b01vtg27m3mnc" path="res://Audio/SoundEffect/collectgem.mp3" id="3_lsf84"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dw4uc"]
-size = Vector2(12, 13)
+[sub_resource type="CircleShape2D" id="CircleShape2D_526s4"]
+radius = 7.01783
 
 [node name="Experiencia" type="Area2D" groups=["loot"]]
 collision_layer = 8
@@ -18,8 +18,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_mo75t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_dw4uc")
+shape = SubResource("CircleShape2D_526s4")
 
 [node name="sonido_exp" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_lsf84")
