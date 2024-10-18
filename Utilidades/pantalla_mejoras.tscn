@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfjto2dup3wv4"]
+
+[ext_resource type="Script" path="res://Utilidades/pantalla_mejoras.gd" id="1_ag57l"]
+[ext_resource type="FontFile" uid="uid://t2p7r82007sp" path="res://Font/m6x11.ttf" id="2_3fxt2"]
+[ext_resource type="Script" path="res://Utilidades/basic_button.gd" id="3_vq3m5"]
+
+[node name="pantalla_mejoras" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ag57l")
+
+[node name="Fondo" type="ColorRect" parent="."]
+offset_left = -143.0
+offset_top = 2.0
+offset_right = 704.0
+offset_bottom = 373.0
+color = Color(0.565333, 0.215866, 0.253388, 1)
+
+[node name="Titulo" type="Label" parent="."]
+texture_filter = 1
+offset_left = -143.0
+offset_right = 703.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("2_3fxt2")
+theme_override_font_sizes/font_size = 50
+text = "Compras
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 19.0
+offset_top = 118.0
+offset_right = 95.0
+offset_bottom = 158.0
+
+[node name="VelocidadContainer" type="Label" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Velocidad"
+
+[node name="MejorarButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Mejorar"
+script = ExtResource("3_vq3m5")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 130.0
+offset_top = 120.0
+offset_right = 230.0
+offset_bottom = 178.0
+
+[node name="SaludContainer" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Vida Maxima"
+
+[node name="MejorarButton" type="Button" parent="VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+text = "Mejorar"
+script = ExtResource("3_vq3m5")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 27.0
+offset_right = 418.0
+offset_bottom = 67.0
+
+[node name="OroLabel" type="Label" parent="VBoxContainer3"]
+layout_mode = 2
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 306.0
+offset_right = 378.0
+offset_bottom = 337.0
+
+[node name="ComenzarButton" type="Button" parent="VBoxContainer4"]
+texture_filter = 1
+layout_mode = 2
+text = "Comenzar Partida"
+script = ExtResource("3_vq3m5")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 33.0
+offset_right = 599.0
+offset_bottom = 64.0
+text = "oroorororo"
+script = ExtResource("3_vq3m5")
+
+[connection signal="pressed" from="VBoxContainer/MejorarButton" to="." method="_on_Velocidad_MejorarButton_pressed"]
+[connection signal="pressed" from="VBoxContainer2/MejorarButton" to="." method="_on_SaludMaxima_MejorarButton_pressed"]
+[connection signal="pressed" from="VBoxContainer4/ComenzarButton" to="." method="_on_ComenzarButton_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_TestButton_pressed"]

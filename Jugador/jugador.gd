@@ -6,6 +6,10 @@ var hp = 80
 var maxhp = 80
 var last_movement = Vector2.UP
 
+# Variables para almacenar las mejoras
+var velocidad_mejorada = 0
+var salud_maxima_mejorada = 0
+
 var gold = 0
 var gold_amount = 0
 var experience = 0
@@ -108,12 +112,12 @@ var enemy_close = []
 signal player_death
 
 func _ready() -> void:
+	aplicar_mejoras()
 	upgrade_character("flecha1")
 	attack()
 	set_expbar(experience, calculated_experiencecap())
 	_on_hurt_box_hurt(0,0,0) 
-	load_gold()
-	print("Oro cargado: ", gold_amount)
+	print("Oro cargado: ", Global.oro_disponible)
 
 func _physics_process(delta: float) -> void:
 	movement()
@@ -180,7 +184,13 @@ func _on_hurt_box_hurt(damage: Variant, _angle, _knockback) -> void:
 		death()
 	print(hp)
 
-
+# Función para aplicar las mejoras al jugador
+func aplicar_mejoras():
+	movement_speed += Global.velocidad_mejorada * 5
+	maxhp += Global.salud_maxima_mejorada * 10
+	hp = maxhp  # Restablecer salud
+	print("Velocidad: ", movement_speed, " Salud máxima: ", maxhp)
+	
 func _on_flecha_timer_timeout() -> void:
 	flecha_ammo += flecha_base_ammo + aditional_attacks
 	flechaAttackTimer.start()
@@ -339,22 +349,15 @@ func _on_collect_area_area_entered(area: Area2D) -> void:
 
 		
 func calculate_gold(gold):
-	gold_amount += gold  # Incrementamos el oro del jugador
+	Global.oro_disponible += gold  # Incrementamos el oro del jugador
 	save_gold()  # Guardamos el oro localmente
-	print("Oro recogido: ", gold, " - Total de oro: ", gold_amount)
+	print("Oro recogido: ", gold, " - Total de oro: ", Global.oro_disponible)
 
 func save_gold():
 	var file = FileAccess.open("user://gold_save.dat", FileAccess.WRITE)  # Abrir el archivo para escribir
-	file.store_var(gold_amount)  # Guardar la cantidad de oro
+	file.store_var(Global.oro_disponible)  # Guardar la cantidad de oro
 	file.close()
-
-func load_gold():
-	var file = FileAccess.open("user://gold_save.dat", FileAccess.READ)  # Abrir el archivo para leer
-	if file:
-		gold_amount = file.get_var()  # Cargar la cantidad de oro
-		file.close()
-	else:
-		gold_amount = 0  # Si no existe el archivo, inicializa con 0 oro
+	
 
 func calculate_experience(exp):
 	var exp_required= calculated_experiencecap()
