@@ -10,7 +10,7 @@ var velocidad_mejorada = 0
 var salud_maxima_mejorada = 0
 
 func _ready():
-	# Cargar el oro actual del jugador
+	cargar_mejoras()
 	load_gold()  # Cargar el oro desde el archivo al Global
 	actualizar_oro_label()
 	
@@ -39,6 +39,8 @@ func _on_Velocidad_MejorarButton_pressed():
 		Global.oro_disponible -= costo
 		save_gold()  # Guarda el oro después de la compra
 		velocidad_mejorada += 1  # Aumentar las mejoras de velocidad
+		Global.velocidad_mejorada += 1  # Aumentar las mejoras de velocidad en Global
+		guardar_mejoras()  # Asegúrate de guardar las mejoras aquí
 		actualizar_oro_label()  # Actualizar la etiqueta
 	else:
 		print("No puedes mejorar más la velocidad o no tienes suficiente oro.")  # Mensaje si no se puede mejorar más
@@ -51,6 +53,8 @@ func _on_SaludMaxima_MejorarButton_pressed():
 		Global.oro_disponible -= costo
 		save_gold()  # Guarda el oro después de la compra
 		salud_maxima_mejorada += 1  # Aumentar las mejoras de salud
+		Global.salud_maxima_mejorada += 1  # Aumentar las mejoras de salud en Global
+		guardar_mejoras()  # Asegúrate de guardar las mejoras aquí
 		actualizar_oro_label()  # Actualizar la etiqueta
 	else:
 		print("No puedes mejorar más la salud máxima o no tienes suficiente oro.")  # Mensaje si no se puede mejorar más
@@ -61,14 +65,32 @@ func _on_ComenzarButton_pressed():
 	guardar_mejoras()
 	# Cambiar a la escena de juego
 	get_tree().change_scene_to_file(level)
+	
+func cargar_mejoras():
+	var file = FileAccess.open("user://mejoras_save.dat", FileAccess.READ)
+	if file:
+		var data = file.get_var()
+		print("Cargando mejoras:", data)
+		Global.velocidad_mejorada = data.get("velocidad_mejorada", 0)  # Cargar y asignar a las variables globales
+		Global.salud_maxima_mejorada = data.get("salud_maxima_mejorada", 0)  # Cargar y asignar a las variables globales
+		file.close()
+	else:
+		print("Archivo de mejoras no encontrado, inicializando valores por defecto.")
+		Global.velocidad_mejorada = 0
+		Global.salud_maxima_mejorada = 0
 
 # Función para guardar las mejoras seleccionadas antes de la partida
 func guardar_mejoras():
-	Global.guardar_mejoras(velocidad_mejorada, salud_maxima_mejorada)
+	var file = FileAccess.open("user://mejoras_save.dat", FileAccess.WRITE)
+	var data = {
+		"velocidad_mejorada": Global.velocidad_mejorada,  # Usar Global
+		"salud_maxima_mejorada": Global.salud_maxima_mejorada  # Usar Global
+	}
+	file.store_var(data)
+	file.close()
 	# Guardar oro restante
 	save_gold()
 	# Aquí podrías guardar las mejoras de velocidad y salud en un archivo o en un nodo de jugador
-	print("Mejoras guardadas: Velocidad =", velocidad_mejorada, " Salud Máxima =", salud_maxima_mejorada)
 
 func _on_TestButton_pressed():
 	Global.oro_disponible += 1000  # Incrementa el oro en 1000
