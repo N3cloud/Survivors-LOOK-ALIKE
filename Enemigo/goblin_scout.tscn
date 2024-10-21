@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhqtp5koj562t"]
+[gd_scene load_steps=13 format=3 uid="uid://dhqtp5koj562t"]
 
 [ext_resource type="Script" path="res://Enemigo/goblin_scout.gd" id="1_l3f4i"]
 [ext_resource type="Texture2D" uid="uid://npjlcwrnejw" path="res://Textures/Enemy/goblin scout - silhouette all animations-run.png" id="2_hhbjd"]
 [ext_resource type="PackedScene" uid="uid://d6vbdqp0g70d" path="res://Utilidades/hurt_box.tscn" id="3_cogcb"]
 [ext_resource type="PackedScene" uid="uid://cb1vuqcjh3t5" path="res://Utilidades/hit_box.tscn" id="4_f54x4"]
 [ext_resource type="AudioStream" uid="uid://cakx84w2cw0ii" path="res://Audio/SoundEffect/enemy_hit.ogg" id="5_6x5wh"]
+[ext_resource type="FontFile" uid="uid://t2p7r82007sp" path="res://Font/m6x11.ttf" id="6_jycbv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lp36a"]
 radius = 5.0
@@ -125,7 +126,19 @@ position = Vector2(3, 3)
 stream = ExtResource("5_6x5wh")
 volume_db = -20.0
 
+[node name="Label" type="Label" parent="."]
+offset_left = 2.0
+offset_top = -31.0
+offset_right = 42.0
+offset_bottom = -8.0
+theme_override_fonts/font = ExtResource("6_jycbv")
+
+[node name="HideTimer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="HideTimer" to="." method="_on_hide_timer_timeout"]
 
 [editable path="HurtBox"]
 [editable path="HitBox"]

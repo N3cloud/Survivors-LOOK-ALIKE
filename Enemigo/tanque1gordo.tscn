@@ -139,7 +139,12 @@ offset_right = 42.0
 offset_bottom = -8.0
 theme_override_fonts/font = ExtResource("7_4v4b4")
 
+[node name="HideTimer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="HideTimer" to="." method="_on_hide_timer_timeout"]
 
 [editable path="HurtBox"]
 [editable path="HitBox"]

@@ -78,9 +78,6 @@ func _on_hurt_box_hurt(damage: Variant, angle: Variant, knockback_amount: Varian
 	print("Damage received: ", damage)
 	knockback = angle * knockback_amount
 	
-	
-
-	
 	if hp <= 0:
 		death()
 	else:

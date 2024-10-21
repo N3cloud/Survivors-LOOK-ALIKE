@@ -127,7 +127,14 @@ position = Vector2(3, 3)
 stream = ExtResource("5_3pp0n")
 volume_db = -20.0
 
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HideTimer" type="Timer" parent="."]
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="HideTimer" to="." method="_on_hide_timer_timeout"]
 
 [editable path="HurtBox"]
 [editable path="HitBox"]

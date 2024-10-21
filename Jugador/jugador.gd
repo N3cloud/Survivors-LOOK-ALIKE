@@ -189,7 +189,11 @@ func aplicar_mejoras():
 	movement_speed += Global.velocidad_mejorada * 5
 	maxhp += Global.salud_maxima_mejorada * 10
 	hp = maxhp  # Restablecer salud
-	print("Velocidad: ", movement_speed, " Salud máxima: ", maxhp)
+	armor += Global.armadura_mejorada
+	spell_cooldown -= Global.enfriamiento_hechizo_mejorado * 0.05
+	aditional_attacks += Global.ataques_adicionales_mejorado
+	health_regeneration_rate += Global.regeneracion_mejorada * 0.5
+	print("Velocidad: ", movement_speed, " Salud máxima: ", maxhp, "Armadura : ", armor, "Cooldown hechizos: ",spell_cooldown, "Adicional atqs: ", aditional_attacks, "Regeneracion: ", health_regeneration_rate)
 	
 func _on_flecha_timer_timeout() -> void:
 	flecha_ammo += flecha_base_ammo + aditional_attacks

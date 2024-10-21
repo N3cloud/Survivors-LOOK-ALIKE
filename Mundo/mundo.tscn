@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://5hjathaik131"]
+[gd_scene load_steps=26 format=3 uid="uid://5hjathaik131"]
 
 [ext_resource type="Texture2D" uid="uid://b10bmgns2e33c" path="res://Textures/MainLev2.0.png" id="1_sft7n"]
 [ext_resource type="PackedScene" uid="uid://dwud7342c4hlo" path="res://Jugador/jugador.tscn" id="2_jpbwj"]
@@ -33,29 +33,20 @@ enemy_num = 1
 enemy_spawn_delay = 0
 spawn_delay_counter = 0
 
-[sub_resource type="Resource" id="Resource_7owvu"]
-script = ExtResource("4_mj78d")
-time_start = 0
-time_end = 30
-enemy = ExtResource("6_g0pgk")
-enemy_num = 1
-enemy_spawn_delay = 15
-spawn_delay_counter = 0
-
 [sub_resource type="Resource" id="Resource_xfssn"]
 script = ExtResource("4_mj78d")
 time_start = 30
 time_end = 60
 enemy = ExtResource("6_g0pgk")
 enemy_num = 1
-enemy_spawn_delay = 0
+enemy_spawn_delay = 15
 spawn_delay_counter = 0
 
 [sub_resource type="Resource" id="Resource_8mky5"]
 script = ExtResource("4_mj78d")
 time_start = 30
 time_end = 60
-enemy = ExtResource("7_usfps")
+enemy = ExtResource("5_bu8o4")
 enemy_num = 2
 enemy_spawn_delay = 0
 spawn_delay_counter = 0
@@ -64,16 +55,16 @@ spawn_delay_counter = 0
 script = ExtResource("4_mj78d")
 time_start = 60
 time_end = 90
-enemy = ExtResource("5_bu8o4")
-enemy_num = 2
-enemy_spawn_delay = 0
+enemy = ExtResource("7_usfps")
+enemy_num = 1
+enemy_spawn_delay = 15
 spawn_delay_counter = 0
 
 [sub_resource type="Resource" id="Resource_x6wrv"]
 script = ExtResource("4_mj78d")
 time_start = 60
 time_end = 90
-enemy = ExtResource("7_usfps")
+enemy = ExtResource("5_bu8o4")
 enemy_num = 2
 enemy_spawn_delay = 15
 spawn_delay_counter = 0
@@ -83,8 +74,8 @@ script = ExtResource("4_mj78d")
 time_start = 90
 time_end = 125
 enemy = ExtResource("7_usfps")
-enemy_num = 2
-enemy_spawn_delay = 0
+enemy_num = 1
+enemy_spawn_delay = 15
 spawn_delay_counter = 0
 
 [sub_resource type="Resource" id="Resource_6aq4m"]
@@ -118,7 +109,7 @@ spawn_delay_counter = 0
 script = ExtResource("4_mj78d")
 time_start = 125
 time_end = 165
-enemy = ExtResource("8_etlw5")
+enemy = ExtResource("5_bu8o4")
 enemy_num = 1
 enemy_spawn_delay = 0
 spawn_delay_counter = 0
@@ -139,7 +130,7 @@ layer_0/tile_data = PackedInt32Array(196612, 2883584, 80, 196621, 2883584, 80, 1
 [node name="Jugador" parent="." groups=["jugador"] instance=ExtResource("2_jpbwj")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_av52f")]
-spawns = Array[ExtResource("4_mj78d")]([SubResource("Resource_2nkof"), SubResource("Resource_7owvu"), SubResource("Resource_xfssn"), SubResource("Resource_8mky5"), SubResource("Resource_akpob"), SubResource("Resource_x6wrv"), SubResource("Resource_u3a5r"), SubResource("Resource_6aq4m"), SubResource("Resource_kvtv1"), SubResource("Resource_hbl3u"), SubResource("Resource_b3hyg")])
+spawns = Array[ExtResource("4_mj78d")]([SubResource("Resource_2nkof"), SubResource("Resource_xfssn"), SubResource("Resource_8mky5"), SubResource("Resource_akpob"), SubResource("Resource_x6wrv"), SubResource("Resource_u3a5r"), SubResource("Resource_6aq4m"), SubResource("Resource_kvtv1"), SubResource("Resource_hbl3u"), SubResource("Resource_b3hyg")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
